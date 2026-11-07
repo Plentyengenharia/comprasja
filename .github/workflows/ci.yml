@@ -28,19 +28,23 @@ jobs:
       JWT_ACCESS_SECRET: ci-access-secret-min-32-characters!!
       JWT_REFRESH_SECRET: ci-refresh-secret-min-32-characters!
       NEXT_PUBLIC_API_URL: http://localhost:4000
+      NODE_ENV: production
 
     steps:
       - uses: actions/checkout@v4
+      # Version comes only from package.json#packageManager (avoids ERR_PNPM_BAD_PM_VERSION)
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-      - run: pnpm install
+      - run: pnpm install --frozen-lockfile
       - run: pnpm db:generate
       - run: pnpm --filter @compras-ja/database exec prisma migrate deploy
       - run: pnpm --filter @compras-ja/shared test
       - run: pnpm --filter @compras-ja/api test
-      - run: pnpm build
+      - run: pnpm --filter @compras-ja/shared build
+      - run: pnpm --filter @compras-ja/ui build
+      - run: pnpm --filter @compras-ja/database build
+      - run: pnpm --filter @compras-ja/api build
+      - run: pnpm --filter @compras-ja/web build

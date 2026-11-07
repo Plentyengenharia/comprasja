@@ -84,3 +84,11 @@ cd public-html && python3 -m http.server 8080
 ```
 
 Após merge em `main` e Pages habilitado: `https://plentyengenharia.github.io/comprasja/`
+
+## Produção (Hostinger)
+
+- URL alvo: **https://comprasja.plentyengenharia.com.br/**
+- Conteúdo: pasta `public-html/`
+- Config: `.hostinger/site.json`
+- Branch de deploy: **`main`**
+- Requer `HOSTINGER_API_TOKEN` no ambiente do agent / secret do GitHub para publicar

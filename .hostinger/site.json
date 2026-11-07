@@ -1,0 +1,7 @@
+{
+  "domain": "comprasja.plentyengenharia.com.br",
+  "type": "static",
+  "source": "public-html",
+  "deployBranch": "main",
+  "notes": "Primary production URL for the Compras Já institutional static site."
+}

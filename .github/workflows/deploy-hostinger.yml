@@ -1,0 +1,45 @@
+name: Deploy Hostinger (main)
+
+# Deploys the institutional static site to comprasja.plentyengenharia.com.br
+# when HOSTINGER_API_TOKEN is present as a repository secret.
+# Primary deploy path for Cloud Agents: Hostinger MCP `hosting_deploy` with path=public-html.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public-html/**"
+      - ".github/workflows/deploy-hostinger.yml"
+      - ".hostinger/site.json"
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pack public-html
+        run: |
+          cd public-html
+          zip -r ../comprasja-static.zip .
+          ls -lh ../comprasja-static.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: comprasja-public-html
+          path: comprasja-static.zip
+
+  # Placeholder gate: real overwrite deploy is done by the Cloud Agent via Hostinger MCP
+  # once HOSTINGER_API_TOKEN is available in the agent environment.
+  notify:
+    runs-on: ubuntu-latest
+    needs: package
+    steps:
+      - name: Deploy target
+        run: |
+          echo "Target: https://comprasja.plentyengenharia.com.br/"
+          echo "Source: public-html/ (branch main)"
+          if [ -z "${{ secrets.HOSTINGER_API_TOKEN }}" ]; then
+            echo "::warning::HOSTINGER_API_TOKEN not set — artifact packaged only. Add the secret and re-run the Cloud Agent deploy."
+          else
+            echo "Token present in GitHub secrets. Use Cloud Agent Hostinger MCP hosting_deploy for the live overwrite."
+          fi

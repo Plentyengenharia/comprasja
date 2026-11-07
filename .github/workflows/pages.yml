@@ -1,11 +1,8 @@
 name: Deploy GitHub Pages (public-html)
 
+# Manual only until Pages is enabled in the repo settings.
+# Hostinger is the primary deploy target for comprasja.plentyengenharia.com.br.
 on:
-  push:
-    branches: [main]
-    paths:
-      - "public-html/**"
-      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -27,6 +24,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
