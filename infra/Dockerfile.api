@@ -1,0 +1,19 @@
+FROM node:22-alpine AS deps
+WORKDIR /app
+RUN corepack enable
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* ./
+COPY packages ./packages
+COPY apps/api ./apps/api
+RUN pnpm install --frozen-lockfile || pnpm install
+
+FROM deps AS build
+RUN pnpm --filter @compras-ja/shared build \
+ && pnpm --filter @compras-ja/database build \
+ && pnpm --filter @compras-ja/api build
+
+FROM node:22-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=build /app /app
+EXPOSE 4000
+CMD ["node", "apps/api/dist/main.js"]

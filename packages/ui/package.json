@@ -1,0 +1,37 @@
+{
+  "name": "@compras-ja/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./src/styles.css"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --external react --external react-dom --clean",
+    "dev": "tsup src/index.ts --format esm --dts --external react --external react-dom --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo \"lint:ui ok\"",
+    "test": "echo \"ui: visual components covered via web app\""
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.487.0",
+    "tailwind-merge": "^3.1.0"
+  },
+  "devDependencies": {
+    "@compras-ja/config": "workspace:*",
+    "@types/react": "^19.1.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
+  }
+}

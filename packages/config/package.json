@@ -1,0 +1,13 @@
+{
+  "name": "@compras-ja/config",
+  "version": "0.1.0",
+  "private": true,
+  "files": ["tsconfig/*.json", "tailwind/preset.ts", "eslint/base.js"],
+  "exports": {
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/nextjs.json": "./tsconfig/nextjs.json",
+    "./tsconfig/nestjs.json": "./tsconfig/nestjs.json",
+    "./tailwind/preset": "./tailwind/preset.ts",
+    "./eslint/base": "./eslint/base.js"
+  }
+}
