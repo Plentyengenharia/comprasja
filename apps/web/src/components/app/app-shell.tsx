@@ -49,7 +49,7 @@ export function AppShell({
         )}
       >
         <div className="flex h-16 items-center justify-between px-4">
-          <ComprasJaLogo inverted showWordmark={!collapsed} markClassName="h-7 w-7" />
+          <ComprasJaLogo inverted size={collapsed ? 'sm' : 'md'} showWordmark={!collapsed} />
           <button
             type="button"
             className="hidden rounded-lg p-1 hover:bg-white/10 lg:inline-flex"

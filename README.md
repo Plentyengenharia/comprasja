@@ -69,3 +69,5 @@ Após o seed (senha `ComprasJa!Demo1`):
 ## Marca
 
 Nome de apresentação: **Compras Já**. Não utilizar nomes anteriores (ex.: Procura Cloud) nem identidade visual de concorrentes.
+
+Arquivos para GitHub (avatar / README): pasta [`brand/`](./brand/) — comece por `brand/logo-github.svg`.

@@ -1,129 +1,254 @@
 import Link from 'next/link';
-import { ArrowRight, Building2, Lock, Scale, Store } from 'lucide-react';
+import { ArrowRight, Building2, ShieldCheck, Sparkles, Store } from 'lucide-react';
 import { Button, ComprasJaLogo } from '@compras-ja/ui';
-import { BRAND } from '@compras-ja/shared';
+import { BRAND, formatBrl } from '@compras-ja/shared';
+import { apiGet } from '@/lib/api';
 
-export default function HomePage() {
+type PublicList = {
+  items: Array<{
+    id: string;
+    processNumber: string;
+    objectTitle: string;
+    modality: string;
+    status: string;
+    estimatedValue: string;
+    organization: { legalName: string; city: string | null; state: string | null };
+  }>;
+};
+
+export default async function HomePage() {
+  let live: PublicList | null = null;
+  try {
+    live = await apiGet<PublicList>('/procurements/public?pageSize=3', { cache: 'no-store' });
+  } catch {
+    live = null;
+  }
+
   return (
     <>
-      <section className="relative overflow-hidden bg-brand-navy text-white">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background:
-              'radial-gradient(ellipse 80% 60% at 70% 20%, rgba(13,148,136,0.45), transparent 55%), radial-gradient(ellipse 60% 50% at 15% 80%, rgba(23,107,154,0.5), transparent 50%), linear-gradient(160deg, #102A43 0%, #0b1c2e 100%)',
-          }}
-        />
-        <div className="relative mx-auto grid min-h-[78vh] max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <div className="animate-fade-up mb-6">
-              <ComprasJaLogo inverted markClassName="h-10 w-10" className="text-2xl" />
-            </div>
-            <h1 className="animate-fade-up max-w-xl text-4xl font-semibold tracking-tight sm:text-5xl">
-              Compras Já. A nova geração das licitações eletrônicas.
-            </h1>
-            <p className="animate-fade-up-delay mt-5 max-w-xl text-base text-white/80 sm:text-lg">
-              Conectamos órgãos públicos e fornecedores em uma plataforma inteligente, segura e
-              transparente. Simplifique contratações, descubra oportunidades e transforme a gestão
-              das licitações.
-            </p>
-            <div className="animate-fade-up-delay mt-8 flex flex-wrap gap-3">
-              <Link href="/funcionalidades">
-                <Button size="lg" variant="secondary">
-                  Conhecer a plataforma
-                  <ArrowRight size={18} />
-                </Button>
-              </Link>
-              <Link href="/cadastro">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white/30 bg-transparent text-white hover:bg-white/10"
-                >
-                  Criar conta gratuitamente
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="relative hidden min-h-[320px] lg:block">
-            <div className="absolute inset-0 rounded-[2rem] border border-white/10 bg-gradient-to-br from-brand-tech/30 via-transparent to-brand-emerald/25 animate-soft-pulse" />
-            <div className="absolute inset-6 rounded-[1.5rem] border border-white/15 bg-white/5 backdrop-blur-sm" />
-            <div className="absolute bottom-10 left-10 right-10 space-y-3">
-              <p className="text-sm uppercase tracking-[0.2em] text-teal-200/90">Ambiente seguro</p>
-              <p className="text-2xl font-medium leading-snug">
-                Infraestrutura preparada para transparência, auditoria e disputas em homologação.
-              </p>
-            </div>
-          </div>
+      {/* Hero — uma composição, brand first, full-bleed */}
+      <section className="relative overflow-hidden cj-mesh">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="animate-drift absolute -left-24 top-16 h-72 w-72 rounded-full bg-brand-emerald/25 blur-3xl" />
+          <div className="animate-drift absolute -right-10 top-0 h-96 w-96 rounded-full bg-brand-tech/30 blur-3xl [animation-delay:1.2s]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white/80 to-transparent" />
         </div>
-      </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <h2 className="text-3xl font-semibold text-ink">Uma plataforma. Cinco ambientes.</h2>
-        <p className="mt-3 max-w-2xl text-ink-muted">
-          Institucional, fornecedores, órgãos públicos, administração SaaS e portal de transparência
-          compartilham a mesma infraestrutura, com isolamento rigoroso entre organizações.
-        </p>
-        <div className="mt-10 grid gap-8 md:grid-cols-2">
-          {[
-            {
-              icon: Building2,
-              title: 'Órgãos públicos',
-              body: 'Planeje, publique, conduza sessões e homologie com trilhas de auditoria.',
-              href: '/para-orgaos',
-            },
-            {
-              icon: Store,
-              title: 'Fornecedores',
-              body: 'Encontre oportunidades, organize documentos e acompanhe propostas e contratos.',
-              href: '/para-fornecedores',
-            },
-            {
-              icon: Scale,
-              title: 'Transparência',
-              body: 'Consulta pública a editais, resultados e contratos divulgáveis, sem paywall.',
-              href: '/transparencia',
-            },
-            {
-              icon: Lock,
-              title: 'Segurança e conformidade',
-              body: 'RBAC, MFA, sigilo de propostas e alinhamento à Lei 14.133/2021.',
-              href: '/funcionalidades',
-            },
-          ].map((item) => (
-            <Link key={item.href} href={item.href} className="group block border-t border-line pt-6">
-              <item.icon className="h-6 w-6 text-brand-tech" />
-              <h3 className="mt-4 text-xl font-semibold text-ink group-hover:text-brand-tech">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-ink-muted">{item.body}</p>
+        <div className="relative mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-6xl flex-col justify-center px-4 py-12 sm:px-6 sm:py-16">
+          <div className="animate-fade-up mb-5">
+            <ComprasJaLogo size="lg" />
+          </div>
+
+          <p className="animate-fade-up font-display text-xs font-semibold uppercase tracking-[0.22em] text-brand-tech sm:text-sm">
+            {BRAND.slogan}
+          </p>
+
+          <h1 className="animate-fade-up-delay mt-4 max-w-4xl font-display text-[2.35rem] font-semibold leading-[1.05] tracking-[-0.04em] text-brand-navy sm:text-5xl lg:text-[3.75rem]">
+            Compras Já. A nova geração das{' '}
+            <span className="cj-text-gradient">licitações eletrônicas</span>.
+          </h1>
+
+          <p className="animate-fade-up-delay mt-5 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
+            Conectamos órgãos públicos e fornecedores em uma plataforma inteligente, segura e
+            transparente. Simplifique contratações, descubra oportunidades e transforme a gestão
+            das licitações.
+          </p>
+
+          <div className="animate-fade-up-delay-2 mt-8 flex flex-wrap items-center gap-3">
+            <Link href="/funcionalidades">
+              <Button size="lg" variant="secondary">
+                Conhecer a plataforma
+                <ArrowRight size={18} />
+              </Button>
             </Link>
-          ))}
+            <Link href="/cadastro">
+              <Button size="lg" variant="primary">
+                Criar conta gratuitamente
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
+      {/* Duas conversas / dois públicos */}
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <h2 className="text-3xl font-semibold text-ink">Por que {BRAND.name}</h2>
-          <p className="mt-3 max-w-2xl text-ink-muted">
-            Desenhado para o mercado brasileiro de compras públicas, com motor de disputas
-            transacional, integrações preparadas para o PNCP e operação SaaS.
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-emerald">
+            Uma plataforma, duas jornadas
           </p>
-          <ul className="mt-10 grid gap-6 sm:grid-cols-3">
+          <h2 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-[-0.03em] text-brand-navy sm:text-4xl">
+            Escolha o seu lado da mesa. O Compras Já acompanha o processo inteiro.
+          </h2>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            <Link
+              href="/para-orgaos"
+              className="group relative overflow-hidden rounded-[1.75rem] border border-line bg-gradient-to-br from-[#f4faf9] to-white p-8 transition hover:-translate-y-1 hover:shadow-soft"
+            >
+              <Building2 className="h-8 w-8 text-brand-tech" />
+              <h3 className="mt-6 font-display text-2xl font-semibold text-brand-navy">
+                Para órgãos públicos
+              </h3>
+              <p className="mt-3 text-ink-muted">
+                Planejamento, editais, sessões, julgamento, habilitação, recursos e contratos com
+                trilha de auditoria.
+              </p>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-tech">
+                Ver jornada do órgão <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+              </span>
+            </Link>
+
+            <Link
+              href="/para-fornecedores"
+              className="group relative overflow-hidden rounded-[1.75rem] border border-line bg-gradient-to-br from-[#f3f8fc] to-white p-8 transition hover:-translate-y-1 hover:shadow-soft"
+            >
+              <Store className="h-8 w-8 text-brand-emerald" />
+              <h3 className="mt-6 font-display text-2xl font-semibold text-brand-navy">
+                Para fornecedores
+              </h3>
+              <p className="mt-3 text-ink-muted">
+                Oportunidades, cofre documental, propostas com protocolo e acompanhamento de
+                disputas e contratos.
+              </p>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-emerald">
+                Ver jornada do fornecedor{' '}
+                <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Princípios — estilo moderno, sem cards de métricas inventadas */}
+      <section className="relative overflow-hidden cj-mesh-dark text-white">
+        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <div className="flex items-center gap-3">
+            <Sparkles className="h-5 w-5 text-teal-200" />
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-teal-200/90">
+              Tecnologia com controle humano
+            </p>
+          </div>
+          <h2 className="mt-4 max-w-3xl font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+            A plataforma executa o trabalho pesado. A decisão continua com você.
+          </h2>
+
+          <ol className="mt-12 grid gap-8 md:grid-cols-3">
             {[
-              'Relógio do servidor autoritativo para lances e prazos',
-              'Multitenancy com permissões no backend',
-              'Publicação oficial PNCP desativável até credenciamento',
-            ].map((text) => (
-              <li key={text} className="border-l-2 border-brand-emerald pl-4 text-sm text-ink">
-                {text}
+              {
+                n: '01',
+                title: 'Execução assistida',
+                body: 'Fluxos, validações e registros nas etapas da Lei 14.133 — sem decisões administrativas autônomas por IA.',
+              },
+              {
+                n: '02',
+                title: 'Auditoria nativa',
+                body: 'Permissões no backend, trilhas com integridade e isolamento rigoroso entre organizações.',
+              },
+              {
+                n: '03',
+                title: 'Transparência real',
+                body: 'Consulta pública sem paywall para o que deve ser público. Sigilo respeitado até o momento legal.',
+              },
+            ].map((item) => (
+              <li key={item.n} className="border-t border-white/15 pt-6">
+                <p className="font-display text-sm font-semibold text-teal-200/90">{item.n}</p>
+                <h3 className="mt-3 font-display text-xl font-semibold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/70">{item.body}</p>
               </li>
             ))}
-          </ul>
-          <div className="mt-10">
-            <Link href="/planos">
-              <Button>Ver planos</Button>
+          </ol>
+        </div>
+      </section>
+
+      {/* Licitações do banco — sem inventar dados */}
+      <section className="bg-surface-muted">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-tech">
+                Transparência
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-[-0.03em] text-brand-navy sm:text-4xl">
+                Processos públicos no Compras Já
+              </h2>
+              <p className="mt-3 max-w-xl text-ink-muted">
+                Lista alimentada pelo banco. Sem métricas inventadas e sem paywall para informação
+                pública.
+              </p>
+            </div>
+            <Link href="/transparencia">
+              <Button variant="outline">Abrir portal</Button>
             </Link>
+          </div>
+
+          <ul className="mt-10 divide-y divide-line overflow-hidden rounded-[1.5rem] border border-line bg-white shadow-soft">
+            {live?.items?.length ? (
+              live.items.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    href={`/transparencia/${item.id}`}
+                    className="flex flex-col gap-2 px-6 py-5 transition hover:bg-surface-muted sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-brand-tech">
+                        {item.modality} · {item.status}
+                      </p>
+                      <p className="mt-1 font-display text-lg font-semibold text-brand-navy">
+                        {item.objectTitle}
+                      </p>
+                      <p className="mt-1 text-sm text-ink-muted">
+                        {item.processNumber} · {item.organization.legalName}
+                        {item.organization.state
+                          ? ` · ${item.organization.city}/${item.organization.state}`
+                          : ''}
+                      </p>
+                    </div>
+                    <p className="text-sm font-semibold text-ink">
+                      {formatBrl(item.estimatedValue)}
+                    </p>
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li className="px-6 py-10 text-sm text-ink-muted">
+                Inicie a API e o banco para listar processos públicos reais aqui.
+              </li>
+            )}
+          </ul>
+        </div>
+      </section>
+
+      {/* CTA final */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <div className="relative overflow-hidden rounded-[2rem] cj-mesh-dark px-8 py-14 text-white sm:px-12">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/40 via-transparent to-brand-emerald/20" />
+            <div className="relative max-w-2xl">
+              <ShieldCheck className="h-8 w-8 text-teal-200" />
+              <h2 className="mt-5 font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+                O sistema trabalha para você. Comece no ambiente demonstrativo.
+              </h2>
+              <p className="mt-4 text-white/75">
+                Cadastre-se, explore os portais e valide os fluxos. Recursos oficiais permanecem
+                bloqueados até homologação jurídica e técnica.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/cadastro">
+                  <Button size="lg" variant="secondary">
+                    Criar conta gratuitamente
+                  </Button>
+                </Link>
+                <Link href="/contato">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/25 bg-transparent text-white hover:bg-white/10"
+                  >
+                    Falar com a equipe
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
