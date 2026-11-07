@@ -42,8 +42,8 @@ export default function CadastroPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-brand-navy px-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-soft">
-        <ComprasJaLogo />
-        <h1 className="mt-6 text-2xl font-semibold text-ink">Criar conta</h1>
+        <ComprasJaLogo size="lg" />
+        <h1 className="mt-6 font-display text-2xl font-semibold text-ink">Criar conta</h1>
         <p className="mt-1 text-sm text-ink-muted">Cadastro gratuito no Compras Já</p>
         <form className="mt-6 space-y-4" onSubmit={onSubmit}>
           <div>

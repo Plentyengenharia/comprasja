@@ -4,24 +4,31 @@ import { siteConfig } from '@/lib/site';
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-brand-navy/95 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
+    <header className="sticky top-0 z-40 border-b border-line/70 bg-white/75 backdrop-blur-xl">
+      <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
         <Link href="/" className="shrink-0">
-          <ComprasJaLogo inverted />
+          <ComprasJaLogo size="md" />
         </Link>
-        <nav className="hidden items-center gap-6 text-sm text-white/80 lg:flex">
+        <nav className="hidden items-center gap-7 text-[0.95rem] font-medium text-ink-muted lg:flex">
           {siteConfig.nav.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-white">
+            <Link
+              key={item.href}
+              href={item.href}
+              className="transition hover:text-brand-navy"
+            >
               {item.label}
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
-          <Link href="/login" className="hidden text-sm text-white/85 sm:inline hover:text-white">
+        <div className="flex items-center gap-3">
+          <Link
+            href="/login"
+            className="hidden text-sm font-semibold text-ink-muted transition hover:text-brand-navy sm:inline"
+          >
             Entrar
           </Link>
           <Link href="/cadastro">
-            <Button size="sm" variant="secondary">
+            <Button size="sm" variant="primary" className="bg-brand-navy">
               Criar conta
             </Button>
           </Link>
