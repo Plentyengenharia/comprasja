@@ -1,0 +1,1034 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// Identidade e multitenancy
+// ─────────────────────────────────────────────
+
+enum OrganizationType {
+  PUBLIC_BODY
+  SUPPLIER
+  PLATFORM
+}
+
+enum MembershipRole {
+  ORG_ADMIN
+  CONTRACTING_AGENT
+  AUCTIONEER
+  CONTRACTING_COMMISSION
+  SUPPORT_TEAM
+  COMPETENT_AUTHORITY
+  CONTRACT_MANAGER
+  CONTRACT_INSPECTOR
+  SUPPLIER_ADMIN
+  AUTHORIZED_REPRESENTATIVE
+  PROPOSAL_OWNER
+  ANALYST
+  READ_ONLY
+  GLOBAL_ADMIN
+  FINANCE
+  SUPPORT
+  AUDITOR
+}
+
+enum MembershipStatus {
+  INVITED
+  ACTIVE
+  SUSPENDED
+  REMOVED
+}
+
+model User {
+  id              String    @id @default(uuid()) @db.Uuid
+  name            String
+  email           String    @unique
+  passwordHash    String
+  emailVerifiedAt DateTime?
+  mfaEnabled      Boolean   @default(false)
+  mfaSecret       String?
+  phone           String?
+  locale          String    @default("pt-BR")
+  timezone        String    @default("America/Sao_Paulo")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  memberships       OrganizationMember[]
+  sessions          Session[]
+  devices           UserDevice[]
+  invitationsSent   Invitation[]         @relation("InvitationInviter")
+  auditEvents       AuditEvent[]
+  notifications     Notification[]
+  favorites         OpportunityFavorite[]
+  ownedProposals    Proposal[]           @relation("ProposalOwner")
+  bids              Bid[]
+  notificationPrefs NotificationPreference[]
+
+  @@index([email])
+  @@map("users")
+}
+
+model Organization {
+  id           String           @id @default(uuid()) @db.Uuid
+  type         OrganizationType
+  legalName    String
+  tradeName    String?
+  /// CNPJ alfanumérico (14 chars) — padrão 2026
+  taxId        String
+  cnae         String?
+  email        String
+  phone        String?
+  street       String?
+  number       String?
+  complement   String?
+  district     String?
+  city         String?
+  state        String?          @db.Char(2)
+  postalCode   String?
+  country      String           @default("BR")
+  isActive     Boolean          @default(true)
+  parentId     String?          @db.Uuid
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  parent              Organization?           @relation("OrgGroup", fields: [parentId], references: [id])
+  children            Organization[]          @relation("OrgGroup")
+  units               OrganizationUnit[]
+  members             OrganizationMember[]
+  invitations         Invitation[]
+  processes           ProcurementProcess[]
+  proposals           Proposal[]
+  contracts           Contract[]
+  subscriptions       Subscription[]
+  billingCustomer     BillingCustomer?
+  documents           OrganizationDocument[]
+  integrationConns    IntegrationConnection[]
+
+  @@unique([taxId, type])
+  @@index([type])
+  @@index([state, city])
+  @@map("organizations")
+}
+
+model OrganizationUnit {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  name           String
+  code           String?
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  processes    ProcurementProcess[]
+
+  @@index([organizationId])
+  @@map("organization_units")
+}
+
+model OrganizationMember {
+  id             String           @id @default(uuid()) @db.Uuid
+  organizationId String           @db.Uuid
+  userId         String           @db.Uuid
+  role           MembershipRole
+  status         MembershipStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+  @@map("organization_members")
+}
+
+model Invitation {
+  id             String           @id @default(uuid()) @db.Uuid
+  organizationId String           @db.Uuid
+  email          String
+  role           MembershipRole
+  tokenHash      String           @unique
+  invitedById    String           @db.Uuid
+  expiresAt      DateTime
+  acceptedAt     DateTime?
+  createdAt      DateTime         @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  invitedBy    User         @relation("InvitationInviter", fields: [invitedById], references: [id])
+
+  @@index([organizationId, email])
+  @@map("invitations")
+}
+
+model Session {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String    @db.Uuid
+  refreshTokenHash String
+  userAgent        String?
+  ipAddress        String?
+  expiresAt        DateTime
+  revokedAt        DateTime?
+  createdAt        DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model UserDevice {
+  id         String    @id @default(uuid()) @db.Uuid
+  userId     String    @db.Uuid
+  label      String?
+  userAgent  String?
+  lastSeenAt DateTime  @default(now())
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("user_devices")
+}
+
+model OrganizationDocument {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  fileId         String   @db.Uuid
+  docType        String
+  validUntil     DateTime?
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  file         FileObject   @relation(fields: [fileId], references: [id])
+
+  @@index([organizationId])
+  @@map("organization_documents")
+}
+
+// ─────────────────────────────────────────────
+// Licitações
+// ─────────────────────────────────────────────
+
+enum ProcurementStatus {
+  DRAFT
+  REVIEW
+  APPROVAL
+  READY_TO_PUBLISH
+  PUBLISHED
+  RECEIVING_PROPOSALS
+  DISPUTE
+  JUDGMENT
+  QUALIFICATION
+  APPEALS
+  ADJUDICATION
+  HOMOLOGATION
+  REVOKED
+  ANNULLED
+  FAILED
+  DESERTED
+}
+
+enum JudgmentCriterion {
+  LOWEST_PRICE
+  HIGHEST_DISCOUNT
+  TECHNICAL_AND_PRICE
+  HIGHEST_BID
+  BEST_TECHNIQUE
+}
+
+enum DisputeMode {
+  OPEN
+  CLOSED
+  COMBINED
+}
+
+model ProcurementProcess {
+  id                   String             @id @default(uuid()) @db.Uuid
+  organizationId       String             @db.Uuid
+  unitId               String?            @db.Uuid
+  processNumber        String
+  fiscalYear           Int
+  objectTitle          String
+  objectDescription    String
+  modality             String
+  judgmentCriterion    JudgmentCriterion  @default(LOWEST_PRICE)
+  legalRegime          String             @default("Lei 14.133/2021")
+  disputeMode          DisputeMode        @default(OPEN)
+  status               ProcurementStatus  @default(DRAFT)
+  estimatedValue       Decimal            @db.Decimal(18, 4)
+  secrecyUntil         DateTime?
+  proposalDeadlineAt   DateTime?
+  sessionScheduledAt   DateTime?
+  publishedAt          DateTime?
+  isPublicTransparency Boolean            @default(true)
+  officialPncpId       String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  organization Organization            @relation(fields: [organizationId], references: [id])
+  unit         OrganizationUnit?       @relation(fields: [unitId], references: [id])
+  lots         ProcurementLot[]
+  documents    ProcurementDocument[]
+  approvals    ProcurementApproval[]
+  publications ProcurementPublication[]
+  deadlines    ProcurementDeadline[]
+  clarifications ClarificationRequest[]
+  challenges   Challenge[]
+  proposals    Proposal[]
+  sessions     BiddingSession[]
+  favorites    OpportunityFavorite[]
+  contracts    Contract[]
+  judgments    Judgment[]
+  awards       Award[]
+  homologations Homologation[]
+
+  @@unique([organizationId, processNumber, fiscalYear])
+  @@index([status])
+  @@index([organizationId, status])
+  @@index([publishedAt])
+  @@map("procurement_processes")
+}
+
+model ProcurementLot {
+  id           String   @id @default(uuid()) @db.Uuid
+  processId    String   @db.Uuid
+  lotNumber    Int
+  title        String
+  description  String?
+  estimatedValue Decimal @db.Decimal(18, 4)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  process  ProcurementProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+  items    ProcurementItem[]
+  sessions BiddingSession[]
+  proposalItems ProposalItem[]
+
+  @@unique([processId, lotNumber])
+  @@map("procurement_lots")
+}
+
+model ProcurementItem {
+  id          String   @id @default(uuid()) @db.Uuid
+  lotId       String   @db.Uuid
+  itemNumber  Int
+  description String
+  unit        String
+  quantity    Decimal  @db.Decimal(18, 4)
+  unitPrice   Decimal? @db.Decimal(18, 4)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  lot           ProcurementLot @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  proposalItems ProposalItem[]
+  contractItems ContractItem[]
+
+  @@unique([lotId, itemNumber])
+  @@map("procurement_items")
+}
+
+model ProcurementDocument {
+  id        String   @id @default(uuid()) @db.Uuid
+  processId String   @db.Uuid
+  fileId    String   @db.Uuid
+  docType   String
+  title     String
+  isPublic  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  process ProcurementProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+  file    FileObject         @relation(fields: [fileId], references: [id])
+
+  @@index([processId])
+  @@map("procurement_documents")
+}
+
+model ProcurementApproval {
+  id         String   @id @default(uuid()) @db.Uuid
+  processId  String   @db.Uuid
+  fromStatus ProcurementStatus
+  toStatus   ProcurementStatus
+  actorId    String   @db.Uuid
+  notes      String?
+  createdAt  DateTime @default(now())
+
+  process ProcurementProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@index([processId])
+  @@map("procurement_approvals")
+}
+
+model ProcurementPublication {
+  id           String   @id @default(uuid()) @db.Uuid
+  processId    String   @db.Uuid
+  channel      String
+  externalId   String?
+  publishedAt  DateTime @default(now())
+  payloadJson  Json?
+
+  process ProcurementProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@index([processId])
+  @@map("procurement_publications")
+}
+
+model ProcurementDeadline {
+  id        String   @id @default(uuid()) @db.Uuid
+  processId String   @db.Uuid
+  label     String
+  dueAt     DateTime
+  createdAt DateTime @default(now())
+
+  process ProcurementProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@index([processId, dueAt])
+  @@map("procurement_deadlines")
+}
+
+model ClarificationRequest {
+  id         String   @id @default(uuid()) @db.Uuid
+  processId  String   @db.Uuid
+  askedById  String?  @db.Uuid
+  question   String
+  answer     String?
+  answeredAt DateTime?
+  createdAt  DateTime @default(now())
+
+  process ProcurementProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@index([processId])
+  @@map("clarification_requests")
+}
+
+model Challenge {
+  id         String   @id @default(uuid()) @db.Uuid
+  processId  String   @db.Uuid
+  filedById  String?  @db.Uuid
+  content    String
+  decision   String?
+  decidedAt  DateTime?
+  createdAt  DateTime @default(now())
+
+  process ProcurementProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@index([processId])
+  @@map("challenges")
+}
+
+model OpportunityFavorite {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  processId String   @db.Uuid
+  createdAt DateTime @default(now())
+
+  user    User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  process ProcurementProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, processId])
+  @@map("opportunity_favorites")
+}
+
+// ─────────────────────────────────────────────
+// Propostas e disputas
+// ─────────────────────────────────────────────
+
+enum ProposalStatus {
+  DRAFT
+  VALIDATING
+  SUBMITTED
+  WITHDRAWN
+  CLASSIFIED
+  DISQUALIFIED
+}
+
+enum BidSessionStatus {
+  SCHEDULED
+  OPEN
+  SUSPENDED
+  CLOSED
+  CANCELLED
+}
+
+enum BidStatus {
+  ACCEPTED
+  REJECTED
+  PENDING
+}
+
+model Proposal {
+  id               String         @id @default(uuid()) @db.Uuid
+  processId        String         @db.Uuid
+  organizationId   String         @db.Uuid
+  ownerUserId      String         @db.Uuid
+  status           ProposalStatus @default(DRAFT)
+  protocolNumber   String?        @unique
+  submittedAt      DateTime?
+  totalValue       Decimal?       @db.Decimal(18, 4)
+  isSecret         Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  process      ProcurementProcess @relation(fields: [processId], references: [id])
+  organization Organization       @relation(fields: [organizationId], references: [id])
+  owner        User               @relation("ProposalOwner", fields: [ownerUserId], references: [id])
+  items        ProposalItem[]
+  documents    ProposalDocument[]
+  submissions  ProposalSubmission[]
+
+  @@unique([processId, organizationId])
+  @@index([organizationId, status])
+  @@map("proposals")
+}
+
+model ProposalItem {
+  id         String   @id @default(uuid()) @db.Uuid
+  proposalId String   @db.Uuid
+  lotId      String   @db.Uuid
+  itemId     String?  @db.Uuid
+  unitPrice  Decimal  @db.Decimal(18, 4)
+  totalPrice Decimal  @db.Decimal(18, 4)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  proposal Proposal         @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  lot      ProcurementLot   @relation(fields: [lotId], references: [id])
+  item     ProcurementItem? @relation(fields: [itemId], references: [id])
+
+  @@index([proposalId])
+  @@map("proposal_items")
+}
+
+model ProposalDocument {
+  id         String   @id @default(uuid()) @db.Uuid
+  proposalId String   @db.Uuid
+  fileId     String   @db.Uuid
+  docType    String
+  createdAt  DateTime @default(now())
+
+  proposal Proposal   @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  file     FileObject @relation(fields: [fileId], references: [id])
+
+  @@index([proposalId])
+  @@map("proposal_documents")
+}
+
+model ProposalSubmission {
+  id         String   @id @default(uuid()) @db.Uuid
+  proposalId String   @db.Uuid
+  protocol   String   @unique
+  payloadHash String
+  submittedAt DateTime @default(now())
+
+  proposal Proposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+
+  @@map("proposal_submissions")
+}
+
+model BiddingSession {
+  id              String           @id @default(uuid()) @db.Uuid
+  processId       String           @db.Uuid
+  lotId           String           @db.Uuid
+  status          BidSessionStatus @default(SCHEDULED)
+  disputeMode     DisputeMode      @default(OPEN)
+  scheduledStartAt DateTime
+  openedAt        DateTime?
+  closedAt        DateTime?
+  serverClockSkewMs Int            @default(0)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  process     ProcurementProcess @relation(fields: [processId], references: [id])
+  lot         ProcurementLot     @relation(fields: [lotId], references: [id])
+  rounds      BiddingRound[]
+  bids        Bid[]
+  events      BiddingEvent[]
+  suspensions BiddingSuspension[]
+
+  @@unique([processId, lotId])
+  @@index([status])
+  @@map("bidding_sessions")
+}
+
+model BiddingRound {
+  id        String   @id @default(uuid()) @db.Uuid
+  sessionId String   @db.Uuid
+  roundNumber Int
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+
+  session BiddingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  bids    Bid[]
+
+  @@unique([sessionId, roundNumber])
+  @@map("bidding_rounds")
+}
+
+model Bid {
+  id               String    @id @default(uuid()) @db.Uuid
+  sessionId        String    @db.Uuid
+  roundId          String?   @db.Uuid
+  bidderUserId     String    @db.Uuid
+  bidderOrgId      String    @db.Uuid
+  amount           Decimal   @db.Decimal(18, 4)
+  status           BidStatus @default(PENDING)
+  idempotencyKey   String
+  clientSentAt     DateTime?
+  serverReceivedAt DateTime  @default(now())
+  acceptedAt       DateTime?
+  rejectReason     String?
+  sequence         BigInt    @default(autoincrement())
+  createdAt        DateTime  @default(now())
+
+  session BiddingSession @relation(fields: [sessionId], references: [id])
+  round   BiddingRound?  @relation(fields: [roundId], references: [id])
+  bidder  User           @relation(fields: [bidderUserId], references: [id])
+
+  @@unique([sessionId, idempotencyKey])
+  @@index([sessionId, sequence])
+  @@index([bidderOrgId])
+  @@map("bids")
+}
+
+model BiddingEvent {
+  id        String   @id @default(uuid()) @db.Uuid
+  sessionId String   @db.Uuid
+  eventType String
+  payload   Json
+  sequence  BigInt   @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  session BiddingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, sequence])
+  @@map("bidding_events")
+}
+
+model BiddingSuspension {
+  id         String    @id @default(uuid()) @db.Uuid
+  sessionId  String    @db.Uuid
+  reason     String
+  startedAt  DateTime  @default(now())
+  resumedAt  DateTime?
+  actorId    String?   @db.Uuid
+
+  session BiddingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@map("bidding_suspensions")
+}
+
+// ─────────────────────────────────────────────
+// Resultados
+// ─────────────────────────────────────────────
+
+model Judgment {
+  id        String   @id @default(uuid()) @db.Uuid
+  processId String   @db.Uuid
+  notes     String?
+  decidedAt DateTime @default(now())
+  actorId   String?  @db.Uuid
+
+  process ProcurementProcess @relation(fields: [processId], references: [id])
+
+  @@index([processId])
+  @@map("judgments")
+}
+
+model QualificationReview {
+  id         String   @id @default(uuid()) @db.Uuid
+  processId  String   @db.Uuid
+  orgId      String   @db.Uuid
+  result     String
+  notes      String?
+  decidedAt  DateTime @default(now())
+
+  @@index([processId])
+  @@map("qualification_reviews")
+}
+
+model Appeal {
+  id        String   @id @default(uuid()) @db.Uuid
+  processId String   @db.Uuid
+  filedByOrgId String @db.Uuid
+  content   String
+  decision  String?
+  decidedAt DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([processId])
+  @@map("appeals")
+}
+
+model Award {
+  id        String   @id @default(uuid()) @db.Uuid
+  processId String   @db.Uuid
+  winnerOrgId String @db.Uuid
+  amount    Decimal  @db.Decimal(18, 4)
+  awardedAt DateTime @default(now())
+
+  process ProcurementProcess @relation(fields: [processId], references: [id])
+
+  @@index([processId])
+  @@map("awards")
+}
+
+model Homologation {
+  id          String   @id @default(uuid()) @db.Uuid
+  processId   String   @db.Uuid
+  homologatedAt DateTime @default(now())
+  actorId     String?  @db.Uuid
+  notes       String?
+
+  process ProcurementProcess @relation(fields: [processId], references: [id])
+
+  @@index([processId])
+  @@map("homologations")
+}
+
+// ─────────────────────────────────────────────
+// Contratos e atas
+// ─────────────────────────────────────────────
+
+model PriceRegistrationRecord {
+  id        String   @id @default(uuid()) @db.Uuid
+  processId String   @db.Uuid
+  number    String
+  validFrom DateTime
+  validTo   DateTime
+  createdAt DateTime @default(now())
+
+  @@index([processId])
+  @@map("price_registration_records")
+}
+
+model Contract {
+  id             String   @id @default(uuid()) @db.Uuid
+  processId      String   @db.Uuid
+  organizationId String   @db.Uuid
+  supplierOrgId  String   @db.Uuid
+  number         String
+  totalValue     Decimal  @db.Decimal(18, 4)
+  startsAt       DateTime
+  endsAt         DateTime
+  status         String   @default("ACTIVE")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  process      ProcurementProcess @relation(fields: [processId], references: [id])
+  organization Organization       @relation(fields: [organizationId], references: [id])
+  items        ContractItem[]
+  amendments   ContractAmendment[]
+  events       ContractEvent[]
+
+  @@unique([organizationId, number])
+  @@index([supplierOrgId])
+  @@map("contracts")
+}
+
+model ContractItem {
+  id         String  @id @default(uuid()) @db.Uuid
+  contractId String  @db.Uuid
+  itemId     String? @db.Uuid
+  description String
+  quantity   Decimal @db.Decimal(18, 4)
+  unitPrice  Decimal @db.Decimal(18, 4)
+
+  contract Contract         @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  item     ProcurementItem? @relation(fields: [itemId], references: [id])
+
+  @@index([contractId])
+  @@map("contract_items")
+}
+
+model ContractAmendment {
+  id         String   @id @default(uuid()) @db.Uuid
+  contractId String   @db.Uuid
+  kind       String
+  description String
+  valueDelta Decimal? @db.Decimal(18, 4)
+  createdAt  DateTime @default(now())
+
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([contractId])
+  @@map("contract_amendments")
+}
+
+model ContractEvent {
+  id         String   @id @default(uuid()) @db.Uuid
+  contractId String   @db.Uuid
+  eventType  String
+  notes      String?
+  createdAt  DateTime @default(now())
+
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([contractId])
+  @@map("contract_events")
+}
+
+// ─────────────────────────────────────────────
+// Financeiro SaaS
+// ─────────────────────────────────────────────
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+}
+
+enum PlanCode {
+  PUBLIC_FREE
+  START
+  PRO
+  BUSINESS
+  ENTERPRISE
+}
+
+model Plan {
+  id           String   @id @default(uuid()) @db.Uuid
+  code         PlanCode @unique
+  name         String
+  description  String?
+  monthlyPrice Decimal  @db.Decimal(18, 4)
+  yearlyPrice  Decimal? @db.Decimal(18, 4)
+  featuresJson Json
+  isPublic     Boolean  @default(true)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  subscriptions Subscription[]
+
+  @@map("plans")
+}
+
+model BillingCustomer {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @unique @db.Uuid
+  providerRef    String?
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  invoices     Invoice[]
+
+  @@map("billing_customers")
+}
+
+model Subscription {
+  id             String             @id @default(uuid()) @db.Uuid
+  organizationId String             @db.Uuid
+  planId         String             @db.Uuid
+  status         SubscriptionStatus @default(TRIALING)
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  cancelAt       DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  plan         Plan         @relation(fields: [planId], references: [id])
+
+  @@index([organizationId, status])
+  @@map("subscriptions")
+}
+
+model Invoice {
+  id                String   @id @default(uuid()) @db.Uuid
+  billingCustomerId String   @db.Uuid
+  amount            Decimal  @db.Decimal(18, 4)
+  status            String
+  dueAt             DateTime
+  paidAt            DateTime?
+  createdAt         DateTime @default(now())
+
+  billingCustomer BillingCustomer @relation(fields: [billingCustomerId], references: [id])
+  payments        Payment[]
+
+  @@index([billingCustomerId])
+  @@map("invoices")
+}
+
+model Payment {
+  id               String   @id @default(uuid()) @db.Uuid
+  invoiceId        String   @db.Uuid
+  amount           Decimal  @db.Decimal(18, 4)
+  provider         String
+  providerPaymentId String?
+  status           String
+  idempotencyKey   String   @unique
+  rawPayload       Json?
+  createdAt        DateTime @default(now())
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id])
+
+  @@map("payments")
+}
+
+// ─────────────────────────────────────────────
+// Sistema
+// ─────────────────────────────────────────────
+
+model Notification {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  type      String
+  title     String
+  body      String
+  payload   Json?
+  readAt    DateTime?
+  dedupeKey String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dedupeKey])
+  @@index([userId, readAt])
+  @@map("notifications")
+}
+
+model NotificationPreference {
+  id        String  @id @default(uuid()) @db.Uuid
+  userId    String  @db.Uuid
+  channel   String
+  eventType String
+  enabled   Boolean @default(true)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, channel, eventType])
+  @@map("notification_preferences")
+}
+
+model AuditEvent {
+  id             String   @id @default(uuid()) @db.Uuid
+  actorId        String?  @db.Uuid
+  organizationId String?  @db.Uuid
+  action         String
+  resourceType   String
+  resourceId     String?
+  ipAddress      String?
+  userAgent      String?
+  metadata       Json?
+  integrityHash  String?
+  createdAt      DateTime @default(now())
+
+  actor User? @relation(fields: [actorId], references: [id])
+
+  @@index([organizationId, createdAt])
+  @@index([resourceType, resourceId])
+  @@map("audit_events")
+}
+
+model IntegrationConnection {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String?  @db.Uuid
+  provider       String
+  status         String   @default("DISABLED")
+  configJson     Json?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  syncJobs     IntegrationSyncJob[]
+
+  @@index([provider, status])
+  @@map("integration_connections")
+}
+
+model IntegrationSyncJob {
+  id           String    @id @default(uuid()) @db.Uuid
+  connectionId String    @db.Uuid
+  status       String
+  startedAt    DateTime  @default(now())
+  finishedAt   DateTime?
+  errorMessage String?
+  statsJson    Json?
+
+  connection IntegrationConnection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+
+  @@index([connectionId, startedAt])
+  @@map("integration_sync_jobs")
+}
+
+model FileObject {
+  id           String   @id @default(uuid()) @db.Uuid
+  storageKey   String   @unique
+  bucket       String
+  filename     String
+  mimeType     String
+  sizeBytes    BigInt
+  checksum     String?
+  isPrivate    Boolean  @default(true)
+  uploadedById String?  @db.Uuid
+  createdAt    DateTime @default(now())
+
+  versions             FileVersion[]
+  orgDocuments         OrganizationDocument[]
+  procurementDocuments ProcurementDocument[]
+  proposalDocuments    ProposalDocument[]
+
+  @@map("files")
+}
+
+model FileVersion {
+  id        String   @id @default(uuid()) @db.Uuid
+  fileId    String   @db.Uuid
+  version   Int
+  storageKey String
+  sizeBytes BigInt
+  checksum  String?
+  createdAt DateTime @default(now())
+
+  file FileObject @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@unique([fileId, version])
+  @@map("file_versions")
+}
+
+model OutboxEvent {
+  id          String    @id @default(uuid()) @db.Uuid
+  aggregateType String
+  aggregateId String
+  eventType   String
+  payload     Json
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([publishedAt, createdAt])
+  @@map("outbox_events")
+}
+
+model IdempotencyKey {
+  id         String   @id @default(uuid()) @db.Uuid
+  key        String
+  scope      String
+  responseJson Json?
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+
+  @@unique([scope, key])
+  @@index([expiresAt])
+  @@map("idempotency_keys")
+}
+
+model FeatureFlag {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique
+  description String?
+  enabled     Boolean  @default(false)
+  metadata    Json?
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  @@map("feature_flags")
+}

@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "cursor/**"]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: comprasja
+          POSTGRES_PASSWORD: comprasja
+          POSTGRES_DB: comprasja
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U comprasja -d comprasja"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://comprasja:comprasja@localhost:5432/comprasja?schema=public
+      JWT_ACCESS_SECRET: ci-access-secret-min-32-characters!!
+      JWT_REFRESH_SECRET: ci-refresh-secret-min-32-characters!
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm db:generate
+      - run: pnpm --filter @compras-ja/database exec prisma migrate deploy
+      - run: pnpm --filter @compras-ja/shared test
+      - run: pnpm --filter @compras-ja/api test
+      - run: pnpm build

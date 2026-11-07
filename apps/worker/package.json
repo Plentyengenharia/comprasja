@@ -1,0 +1,25 @@
+{
+  "name": "@compras-ja/worker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo \"lint:worker ok\"",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@compras-ja/database": "workspace:*",
+    "@compras-ja/shared": "workspace:*",
+    "bullmq": "^5.45.2",
+    "ioredis": "^5.6.0"
+  },
+  "devDependencies": {
+    "@compras-ja/config": "workspace:*",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.1"
+  }
+}

@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import "@compras-ja/ui/styles.css";
+
+@theme {
+  --color-brand-navy: #102a43;
+  --color-brand-tech: #176b9a;
+  --color-brand-emerald: #0d9488;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f7f9fc;
+  --color-ink: #172334;
+  --color-ink-muted: #64748b;
+  --color-line: #e2e8f0;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --shadow-soft: 0 1px 2px rgba(16, 42, 67, 0.06), 0 8px 24px rgba(16, 42, 67, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-surface-muted text-ink antialiased;
+  font-family: var(--font-sans);
+}
+
+.dark body {
+  background: #0b1522;
+  color: #e8eef6;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 0.8s ease-out 0.12s both;
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 4s ease-in-out infinite;
+}
