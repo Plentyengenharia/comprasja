@@ -71,3 +71,16 @@ Após o seed (senha `ComprasJa!Demo1`):
 Nome de apresentação: **Compras Já**. Não utilizar nomes anteriores (ex.: Procura Cloud) nem identidade visual de concorrentes.
 
 Arquivos para GitHub (avatar / README): pasta [`brand/`](./brand/) — comece por `brand/logo-github.svg`.
+
+## Site estático (`public-html`)
+
+Vitrine institucional em HTML puro para **GitHub Pages** / deploy estático:
+
+- Pasta: [`public-html/`](./public-html/)
+- Workflow: [`.github/workflows/pages.yml`](./.github/workflows/pages.yml)
+
+```bash
+cd public-html && python3 -m http.server 8080
+```
+
+Após merge em `main` e Pages habilitado: `https://plentyengenharia.github.io/comprasja/`
