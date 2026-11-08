@@ -7,8 +7,8 @@ HTML/CSS puro para publicar no **GitHub Pages** ou fazer deploy estático (Hosti
 - `index.html` — homepage
 - `pages/` — páginas institucionais
 - `css/styles.css` — design system
-- `assets/` — logos SVG (incluindo `logo-github.svg` para avatar do GitHub)
-- `favicon.svg`
+- `assets/` — logos PNG (`logo-mark.png`, `logo-wordmark.png`)
+- `favicon-32.png` / `apple-touch-icon.png` / `site.webmanifest` — app icon / PWA
 
 ## Publicar no GitHub Pages
 

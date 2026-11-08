@@ -2,6 +2,8 @@
   --navy: #102a43;
   --tech: #176b9a;
   --emerald: #0d9488;
+  --gold: #c9a227;
+  --charcoal: #1a1a1b;
   --ink: #122033;
   --muted: #5b6b7c;
   --line: #d9e3ee;
@@ -68,7 +70,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 0.75rem;
 }
-.brand img { width: 40px; height: 40px; }
+.brand img { width: 40px; height: 40px; border-radius: 22%; }
 .brand span {
   font-family: var(--display);
   font-weight: 650;
@@ -77,7 +79,7 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
   color: var(--navy);
 }
-.brand span b { color: var(--emerald); font-weight: 650; }
+.brand span b { color: var(--gold); font-weight: 650; }
 
 .nav {
   display: none;
@@ -376,7 +378,7 @@ img { max-width: 100%; display: block; }
   padding: 3.5rem 0 0;
 }
 .site-footer .brand span { color: #fff; }
-.site-footer .brand span b { color: #99f6e4; }
+.site-footer .brand span b { color: var(--gold); }
 .footer-grid {
   display: flex;
   flex-direction: column;
