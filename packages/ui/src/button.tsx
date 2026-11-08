@@ -17,9 +17,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           size === 'md' && 'h-11 px-5 text-sm',
           size === 'lg' && 'h-12 px-7 text-base',
           variant === 'primary' &&
-            'bg-brand-navy text-white shadow-soft hover:-translate-y-0.5 hover:bg-[#0c2136]',
+            'bg-brand-charcoal text-white shadow-soft hover:-translate-y-0.5 hover:bg-[#1e2229]',
           variant === 'secondary' &&
-            'bg-gradient-to-r from-brand-tech to-brand-emerald text-white shadow-soft hover:-translate-y-0.5',
+            'bg-gradient-to-r from-brand-gold-bright via-brand-gold to-brand-tech text-brand-charcoal shadow-soft hover:-translate-y-0.5',
           variant === 'outline' &&
             'border border-line bg-white/80 text-ink backdrop-blur hover:bg-white dark:bg-transparent',
           variant === 'ghost' && 'text-ink hover:bg-surface-muted',

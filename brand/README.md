@@ -4,19 +4,23 @@ Identidade visual oficial — ícone hexagonal com detalhe dourado e wordmark.
 
 | Arquivo | Uso |
 |---------|-----|
-| `logo-icon.png` | App icon / master do símbolo (fundo squircle) |
-| `logo-mark.png` | Ícone otimizado para UI (128px) |
-| `logo-mark@2x.png` | Ícone retina (256px) |
-| `logo-wordmark.png` | Wordmark completo (ícone + “Compras Já”) |
+| `logo-mark-transparent.png` | Master do símbolo com fundo transparente |
+| `logo-mark.png` / `logo-mark@2x.png` | Ícone otimizado para UI |
+| `logo-icon.png` | App icon / favicon grande (transparente) |
+| `logo-app-icon-filled.png` | Versão com squircle preenchido (quando a plataforma exigir) |
+| `logo-wordmark.png` | Wordmark completo |
 | `logo-github.png` | Avatar do repositório / organização (512×512) |
-| `apple-touch-icon.png` | Ícone iOS / PWA (180×180) |
-| `sources/` | Arquivos originais enviados pela marca |
+| `sources/` | Arquivos originais da marca |
 
 ## Cores
 
-- Charcoal: `#1A1A1B`
-- Gold: `#C9A227`
-- Navy (UI): `#102A43`
+| Token | Hex |
+|-------|-----|
+| Charcoal | `#14161A` |
+| Gold | `#C9A227` |
+| Gold bright | `#E0BC55` |
+| Gold deep | `#9A7B1A` |
+| Surface | `#F7F5F0` |
 
 ## GitHub
 
