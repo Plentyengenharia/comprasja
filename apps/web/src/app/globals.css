@@ -2,23 +2,25 @@
 @import "@compras-ja/ui/styles.css";
 
 @theme {
-  --color-brand-navy: #14161a;
-  --color-brand-tech: #9a7b1a;
-  --color-brand-emerald: #c9a227;
-  --color-brand-gold: #c9a227;
-  --color-brand-gold-bright: #e0bc55;
-  --color-brand-charcoal: #14161a;
+  --color-brand-navy: #171c22;
+  --color-brand-tech: #a88343;
+  --color-brand-emerald: #c9a35d;
+  --color-brand-gold: #c9a35d;
+  --color-brand-gold-bright: #e8d4ac;
+  --color-brand-gold-hover: #a88343;
+  --color-brand-charcoal: #171c22;
   --color-surface: #ffffff;
-  --color-surface-muted: #f7f5f0;
-  --color-ink: #1a1c21;
-  --color-ink-muted: #6b6560;
-  --color-line: #e6e1d8;
-  --color-success: #16a34a;
-  --color-warning: #d97706;
-  --color-danger: #dc2626;
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-outfit), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --shadow-soft: 0 1px 2px rgba(20, 22, 26, 0.06), 0 18px 40px rgba(20, 22, 26, 0.1);
+  --color-surface-muted: #f1f3f4;
+  --color-ink: #171c22;
+  --color-ink-muted: #68727d;
+  --color-line: #e4e7ea;
+  --color-success: #19785e;
+  --color-warning: #b47b2e;
+  --color-danger: #ba424c;
+  --color-info: #3c6584;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --shadow-soft: 0 1px 2px rgba(23, 28, 34, 0.05), 0 16px 36px rgba(23, 28, 34, 0.08);
 }
 
 html {
@@ -26,7 +28,7 @@ html {
 }
 
 body {
-  @apply bg-surface-muted text-ink antialiased;
+  @apply bg-[#FAFAF8] text-ink antialiased;
   font-family: var(--font-sans);
 }
 
@@ -35,23 +37,23 @@ body {
 }
 
 .dark body {
-  background: #0e1014;
-  color: #f3efe6;
+  background: #0e1217;
+  color: #f5f5f3;
 }
 
 .cj-mesh {
   background:
-    radial-gradient(ellipse 70% 55% at 12% 18%, rgba(201, 162, 39, 0.18), transparent 58%),
-    radial-gradient(ellipse 55% 45% at 88% 12%, rgba(20, 22, 26, 0.08), transparent 52%),
-    radial-gradient(ellipse 50% 40% at 70% 85%, rgba(154, 123, 26, 0.1), transparent 55%),
-    linear-gradient(180deg, #fbfaf7 0%, #f4f1ea 42%, #f7f5f0 100%);
+    radial-gradient(ellipse 70% 55% at 12% 18%, rgba(201, 163, 93, 0.14), transparent 58%),
+    radial-gradient(ellipse 55% 45% at 88% 12%, rgba(23, 28, 34, 0.06), transparent 52%),
+    radial-gradient(ellipse 50% 40% at 70% 85%, rgba(232, 212, 172, 0.35), transparent 55%),
+    linear-gradient(180deg, #fafaf8 0%, #f5f5f2 48%, #fafaf8 100%);
 }
 
 .cj-mesh-dark {
   background:
-    radial-gradient(ellipse 65% 50% at 80% 10%, rgba(201, 162, 39, 0.28), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 10% 70%, rgba(224, 188, 85, 0.12), transparent 50%),
-    linear-gradient(165deg, #0e1014 0%, #14161a 45%, #1a1c21 100%);
+    radial-gradient(ellipse 65% 50% at 80% 10%, rgba(201, 163, 93, 0.22), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 10% 70%, rgba(168, 131, 67, 0.12), transparent 50%),
+    linear-gradient(165deg, #0e1217 0%, #171c22 55%, #1b222a 100%);
 }
 
 @keyframes fade-up {
@@ -108,7 +110,7 @@ body {
 }
 
 .cj-text-gradient {
-  background: linear-gradient(120deg, #14161a 8%, #3a3428 42%, #c9a227 92%);
+  background: linear-gradient(120deg, #171c22 10%, #68727d 48%, #c9a35d 92%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
