@@ -350,48 +350,77 @@
         </div>
 
         <div class="licia-hub" aria-hidden="true">
-          <svg class="licia-hub__svg" viewBox="0 0 480 480" role="presentation">
+          <svg class="licia-hub__svg" viewBox="0 0 560 480" role="presentation">
             <defs>
               <radialGradient id="liciaGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#C9A35D" stop-opacity="0.35"/>
-                <stop offset="55%" stop-color="#C9A35D" stop-opacity="0.08"/>
+                <stop offset="0%" stop-color="#C9A35D" stop-opacity="0.4"/>
+                <stop offset="50%" stop-color="#C9A35D" stop-opacity="0.1"/>
                 <stop offset="100%" stop-color="#C9A35D" stop-opacity="0"/>
               </radialGradient>
-              <filter id="liciaLineGlow" x="-40%" y="-40%" width="180%" height="180%">
-                <feGaussianBlur stdDeviation="1.4" result="b"/>
+              <filter id="liciaLineGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="b"/>
                 <feMerge>
                   <feMergeNode in="b"/>
                   <feMergeNode in="SourceGraphic"/>
                 </feMerge>
               </filter>
             </defs>
-            <circle class="licia-orbit" cx="240" cy="240" r="92"/>
-            <circle class="licia-orbit" cx="240" cy="240" r="138"/>
-            <circle class="licia-orbit licia-orbit--strong" cx="240" cy="240" r="186"/>
-            <circle cx="240" cy="240" r="168" fill="url(#liciaGlow)"/>
-            <!-- Lines: node → center (flow animates inward) -->
-            <g class="licia-lines" filter="url(#liciaLineGlow)" stroke="#C9A35D" stroke-width="1.35" fill="none" stroke-linecap="round">
-              <path class="licia-flow" d="M240 54 L240 198"/>
-              <path class="licia-flow" d="M372 98 L268 212"/>
-              <path class="licia-flow" d="M426 240 L282 240"/>
-              <path class="licia-flow" d="M372 382 L268 268"/>
-              <path class="licia-flow" d="M240 426 L240 282"/>
-              <path class="licia-flow" d="M108 382 L212 268"/>
-              <path class="licia-flow" d="M54 240 L198 240"/>
-              <path class="licia-flow" d="M108 98 L212 212"/>
+            <circle cx="280" cy="240" r="120" fill="url(#liciaGlow)"/>
+
+            <!-- Orthogonal microchip traces: outer pad → steps → core pad -->
+            <g class="licia-traces" filter="url(#liciaLineGlow)" fill="none" stroke="#C9A35D" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+              <!-- Top: Termo de referência -->
+              <path class="licia-flow" d="M280 78 L280 198"/>
+              <!-- Top-right: Pesquisa de preços -->
+              <path class="licia-flow" d="M438 112 L360 112 L360 214 L322 214"/>
+              <!-- Right: Edital -->
+              <path class="licia-flow" d="M492 240 L322 240"/>
+              <!-- Bottom-right: Propostas -->
+              <path class="licia-flow" d="M438 368 L360 368 L360 266 L322 266"/>
+              <!-- Bottom: Habilitação -->
+              <path class="licia-flow" d="M280 402 L280 282"/>
+              <!-- Bottom-left: Parecer técnico -->
+              <path class="licia-flow" d="M122 368 L200 368 L200 266 L238 266"/>
+              <!-- Left: Ata -->
+              <path class="licia-flow" d="M68 240 L238 240"/>
+              <!-- Top-left: ETP -->
+              <path class="licia-flow" d="M122 112 L200 112 L200 214 L238 214"/>
             </g>
-            <rect class="licia-core" x="204" y="204" width="72" height="72" rx="16"/>
-            <path class="licia-core__star" d="M240 218l5.2 17.8L263 241l-17.8 5.2L240 264l-5.2-17.8L217 241l17.8-5.2z" fill="#C9A35D"/>
+
+            <!-- Contact pads (outer) -->
+            <g class="licia-pads" fill="#C9A35D">
+              <rect x="276" y="74" width="8" height="8" rx="1"/>
+              <rect x="434" y="108" width="8" height="8" rx="1"/>
+              <rect x="488" y="236" width="8" height="8" rx="1"/>
+              <rect x="434" y="364" width="8" height="8" rx="1"/>
+              <rect x="276" y="398" width="8" height="8" rx="1"/>
+              <rect x="118" y="364" width="8" height="8" rx="1"/>
+              <rect x="64" y="236" width="8" height="8" rx="1"/>
+              <rect x="118" y="108" width="8" height="8" rx="1"/>
+              <!-- Core edge pads -->
+              <rect x="276" y="198" width="8" height="8" rx="1"/>
+              <rect x="318" y="210" width="8" height="8" rx="1"/>
+              <rect x="318" y="236" width="8" height="8" rx="1"/>
+              <rect x="318" y="262" width="8" height="8" rx="1"/>
+              <rect x="276" y="274" width="8" height="8" rx="1"/>
+              <rect x="234" y="262" width="8" height="8" rx="1"/>
+              <rect x="234" y="236" width="8" height="8" rx="1"/>
+              <rect x="234" y="210" width="8" height="8" rx="1"/>
+            </g>
+
+            <rect class="licia-core" x="242" y="202" width="76" height="76" rx="14"/>
+            <path class="licia-core__star" d="M280 216l5.6 19.2L305 241l-19.4 5.6L280 266l-5.6-19.4L255 241l19.4-5.6z" fill="#C9A35D"/>
           </svg>
+
           <ul class="licia-hub__nodes">
-            <li class="licia-node-slot" style="--i:0"><span class="licia-node"><span class="licia-node__ico" data-ico="book"></span>Termo de referência</span></li>
-            <li class="licia-node-slot" style="--i:1"><span class="licia-node"><span class="licia-node__ico" data-ico="chart"></span>Pesquisa de preços</span></li>
-            <li class="licia-node-slot" style="--i:2"><span class="licia-node"><span class="licia-node__ico" data-ico="gavel"></span>Edital</span></li>
-            <li class="licia-node-slot" style="--i:3"><span class="licia-node"><span class="licia-node__ico" data-ico="users"></span>Propostas</span></li>
-            <li class="licia-node-slot" style="--i:4"><span class="licia-node"><span class="licia-node__ico" data-ico="badge"></span>Habilitação</span></li>
-            <li class="licia-node-slot" style="--i:5"><span class="licia-node"><span class="licia-node__ico" data-ico="shield"></span>Parecer técnico</span></li>
-            <li class="licia-node-slot" style="--i:6"><span class="licia-node"><span class="licia-node__ico" data-ico="doc"></span>Ata</span></li>
-            <li class="licia-node-slot" style="--i:7"><span class="licia-node"><span class="licia-node__ico" data-ico="layers"></span>ETP</span></li>
+            <li class="licia-node is-n"><span class="licia-node__ico" data-ico="book"></span>Termo de referência</li>
+            <li class="licia-node is-ne"><span class="licia-node__ico" data-ico="chart"></span>Pesquisa de preços</li>
+            <li class="licia-node is-e"><span class="licia-node__ico" data-ico="gavel"></span>Edital</li>
+            <li class="licia-node is-se"><span class="licia-node__ico" data-ico="users"></span>Propostas</li>
+            <li class="licia-node is-s"><span class="licia-node__ico" data-ico="badge"></span>Habilitação</li>
+            <li class="licia-node is-sw"><span class="licia-node__ico" data-ico="shield"></span>Parecer técnico</li>
+            <li class="licia-node is-w"><span class="licia-node__ico" data-ico="doc"></span>Ata</li>
+            <li class="licia-node is-nw"><span class="licia-node__ico" data-ico="layers"></span>ETP</li>
           </ul>
         </div>
       </div>
