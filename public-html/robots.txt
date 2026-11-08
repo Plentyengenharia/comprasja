@@ -1,2 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /pages/login.html
+Disallow: /pages/cadastro.html
+Disallow: /pages/licitacoes.html
+Disallow: /pages/ajuda.html
+Disallow: /pages/termos.html
+Disallow: /pages/privacidade.html
+
+Sitemap: https://comprasja.plentyengenharia.com.br/sitemap.xml
