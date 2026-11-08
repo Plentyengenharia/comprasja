@@ -1,19 +1,21 @@
 :root {
-  --cj-navy: #14161a;
-  --cj-tech: #9a7b1a;
-  --cj-emerald: #c9a227;
-  --cj-gold: #c9a227;
+  --cj-navy: #171c22;
+  --cj-tech: #a88343;
+  --cj-emerald: #c9a35d;
+  --cj-gold: #c9a35d;
+  --cj-gold-light: #e8d4ac;
   --cj-white: #ffffff;
-  --cj-surface: #f7f5f0;
-  --cj-ink: #1a1c21;
-  --cj-ink-muted: #6b6560;
-  --cj-line: #e6e1d8;
-  --cj-success: #16a34a;
-  --cj-warning: #d97706;
-  --cj-danger: #dc2626;
-  --cj-radius: 1.25rem;
-  --cj-shadow: 0 1px 2px rgba(20, 22, 26, 0.06), 0 18px 40px rgba(20, 22, 26, 0.1);
-  --font-display: var(--font-outfit), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --cj-surface: #fafaf8;
+  --cj-ink: #171c22;
+  --cj-ink-muted: #68727d;
+  --cj-line: #e4e7ea;
+  --cj-success: #19785e;
+  --cj-warning: #b47b2e;
+  --cj-danger: #ba424c;
+  --cj-info: #3c6584;
+  --cj-radius: 12px;
+  --cj-shadow: 0 1px 2px rgba(23, 28, 34, 0.05), 0 16px 36px rgba(23, 28, 34, 0.08);
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 .font-display {
@@ -21,10 +23,10 @@
 }
 
 .dark {
-  --cj-surface: #0e1014;
-  --cj-white: #1a1c21;
-  --cj-ink: #f3efe6;
-  --cj-ink-muted: #a39e94;
-  --cj-line: #2a2e36;
-  --cj-navy: #0e1014;
+  --cj-surface: #0e1217;
+  --cj-white: #1b222a;
+  --cj-ink: #f5f5f3;
+  --cj-ink-muted: #aab2ba;
+  --cj-line: #343d47;
+  --cj-navy: #0e1217;
 }
