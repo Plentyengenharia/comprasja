@@ -123,8 +123,8 @@ export default async function HomePage() {
       <section className="relative overflow-hidden cj-mesh-dark text-white">
         <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="flex items-center gap-3">
-            <Sparkles className="h-5 w-5 text-teal-200" />
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-teal-200/90">
+            <Sparkles className="h-5 w-5 text-brand-gold-bright" />
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-gold-bright/90">
               Tecnologia com controle humano
             </p>
           </div>
@@ -151,7 +151,7 @@ export default async function HomePage() {
               },
             ].map((item) => (
               <li key={item.n} className="border-t border-white/15 pt-6">
-                <p className="font-display text-sm font-semibold text-teal-200/90">{item.n}</p>
+                <p className="font-display text-sm font-semibold text-brand-gold-bright/90">{item.n}</p>
                 <h3 className="mt-3 font-display text-xl font-semibold">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/70">{item.body}</p>
               </li>
@@ -224,7 +224,7 @@ export default async function HomePage() {
           <div className="relative overflow-hidden rounded-[2rem] cj-mesh-dark px-8 py-14 text-white sm:px-12">
             <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/40 via-transparent to-brand-emerald/20" />
             <div className="relative max-w-2xl">
-              <ShieldCheck className="h-8 w-8 text-teal-200" />
+              <ShieldCheck className="h-8 w-8 text-brand-gold-bright" />
               <h2 className="mt-5 font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
                 O sistema trabalha para você. Comece no ambiente demonstrativo.
               </h2>

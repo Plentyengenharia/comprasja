@@ -46,7 +46,7 @@ export function ComprasJaLogo({
         alt=""
         width={56}
         height={56}
-        className={cn(markSize[size], 'shrink-0 rounded-[22%]', markClassName)}
+        className={cn(markSize[size], 'shrink-0 object-contain', markClassName)}
         aria-hidden={showWordmark}
       />
       {showWordmark ? (

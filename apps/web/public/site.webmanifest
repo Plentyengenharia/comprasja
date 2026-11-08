@@ -4,8 +4,8 @@
   "description": "Licitações inteligentes. Oportunidades reais.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1A1A1B",
-  "theme_color": "#1A1A1B",
+  "background_color": "#14161A",
+  "theme_color": "#14161A",
   "icons": [
     {
       "src": "/icon-192.png",

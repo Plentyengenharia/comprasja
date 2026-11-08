@@ -2,22 +2,23 @@
 @import "@compras-ja/ui/styles.css";
 
 @theme {
-  --color-brand-navy: #102a43;
-  --color-brand-tech: #176b9a;
-  --color-brand-emerald: #0d9488;
+  --color-brand-navy: #14161a;
+  --color-brand-tech: #9a7b1a;
+  --color-brand-emerald: #c9a227;
   --color-brand-gold: #c9a227;
-  --color-brand-charcoal: #1a1a1b;
+  --color-brand-gold-bright: #e0bc55;
+  --color-brand-charcoal: #14161a;
   --color-surface: #ffffff;
-  --color-surface-muted: #f3f7fb;
-  --color-ink: #122033;
-  --color-ink-muted: #5b6b7c;
-  --color-line: #d9e3ee;
+  --color-surface-muted: #f7f5f0;
+  --color-ink: #1a1c21;
+  --color-ink-muted: #6b6560;
+  --color-line: #e6e1d8;
   --color-success: #16a34a;
   --color-warning: #d97706;
   --color-danger: #dc2626;
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-outfit), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --shadow-soft: 0 1px 2px rgba(16, 42, 67, 0.05), 0 18px 40px rgba(16, 42, 67, 0.08);
+  --shadow-soft: 0 1px 2px rgba(20, 22, 26, 0.06), 0 18px 40px rgba(20, 22, 26, 0.1);
 }
 
 html {
@@ -34,23 +35,23 @@ body {
 }
 
 .dark body {
-  background: #0b1522;
-  color: #e8eef6;
+  background: #0e1014;
+  color: #f3efe6;
 }
 
 .cj-mesh {
   background:
-    radial-gradient(ellipse 70% 55% at 12% 18%, rgba(13, 148, 136, 0.22), transparent 58%),
-    radial-gradient(ellipse 55% 45% at 88% 12%, rgba(23, 107, 154, 0.28), transparent 52%),
-    radial-gradient(ellipse 50% 40% at 70% 85%, rgba(16, 42, 67, 0.1), transparent 55%),
-    linear-gradient(180deg, #f7fbff 0%, #eef5fb 42%, #f8fafc 100%);
+    radial-gradient(ellipse 70% 55% at 12% 18%, rgba(201, 162, 39, 0.18), transparent 58%),
+    radial-gradient(ellipse 55% 45% at 88% 12%, rgba(20, 22, 26, 0.08), transparent 52%),
+    radial-gradient(ellipse 50% 40% at 70% 85%, rgba(154, 123, 26, 0.1), transparent 55%),
+    linear-gradient(180deg, #fbfaf7 0%, #f4f1ea 42%, #f7f5f0 100%);
 }
 
 .cj-mesh-dark {
   background:
-    radial-gradient(ellipse 65% 50% at 80% 10%, rgba(13, 148, 136, 0.35), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 10% 70%, rgba(23, 107, 154, 0.4), transparent 50%),
-    linear-gradient(165deg, #0d2136 0%, #102a43 45%, #0a1a2b 100%);
+    radial-gradient(ellipse 65% 50% at 80% 10%, rgba(201, 162, 39, 0.28), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 10% 70%, rgba(224, 188, 85, 0.12), transparent 50%),
+    linear-gradient(165deg, #0e1014 0%, #14161a 45%, #1a1c21 100%);
 }
 
 @keyframes fade-up {
@@ -107,7 +108,7 @@ body {
 }
 
 .cj-text-gradient {
-  background: linear-gradient(120deg, #102a43 10%, #176b9a 48%, #0d9488 92%);
+  background: linear-gradient(120deg, #14161a 8%, #3a3428 42%, #c9a227 92%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
