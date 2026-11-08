@@ -1,4 +1,7 @@
 (function () {
+  var yearEl = document.querySelector('[data-year]');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
   var toggle = document.querySelector('[data-nav-toggle]');
   var panel = document.querySelector('[data-nav-panel]');
   if (!toggle || !panel) return;

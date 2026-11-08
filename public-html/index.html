@@ -4,13 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Compras Já | Plataforma de Licitações Eletrônicas</title>
-  <meta name="description" content="Licitações inteligentes. Oportunidades reais. Plataforma nacional de licitações eletrônicas." />
+  <meta name="description" content="A nova geração das licitações eletrônicas. Conectamos órgãos públicos e fornecedores em um ambiente moderno, seguro e eficiente." />
   <link rel="canonical" href="https://comprasja.plentyengenharia.com.br/" />
   <meta property="og:title" content="Compras Já | Plataforma de Licitações Eletrônicas" />
-  <meta property="og:description" content="Licitações inteligentes. Oportunidades reais. Plataforma nacional de licitações eletrônicas." />
+  <meta property="og:description" content="A nova geração das licitações eletrônicas. Conectamos órgãos públicos e fornecedores em um ambiente moderno, seguro e eficiente." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://comprasja.plentyengenharia.com.br/" />
-  <meta property="og:image" content="https://comprasja.plentyengenharia.com.br/assets/logo-wordmark.png" />
+  <meta property="og:image" content="https://comprasja.plentyengenharia.com.br/assets/hero-laptop-mockup.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#171C22" />
   <link rel="icon" href="./favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="./favicon-16.png" type="image/png" sizes="16x16" />
@@ -23,22 +24,27 @@
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
   <header class="site-header">
     <div class="wrap site-header__inner">
       <a class="brand" href="./index.html" aria-label="Compras Já">
-        <img class="brand-mark-dark" src="./assets/logo-mark.png" srcset="./assets/logo-mark.png 1x, ./assets/logo-mark@2x.png 2x" alt="" width="40" height="40" />
+        <img src="./assets/logo-mark-light.png" srcset="./assets/logo-mark-light.png 1x, ./assets/logo-mark-light@2x.png 2x" alt="" width="36" height="36" />
         <span>Compras <b>Já</b></span>
       </a>
       <nav class="nav" aria-label="Principal">
         <a href="./pages/para-orgaos.html">Para órgãos</a>
         <a href="./pages/para-fornecedores.html">Para fornecedores</a>
+        <a href="./pages/licitacoes.html">Licitações</a>
         <a href="./pages/funcionalidades.html">Funcionalidades</a>
-        <a href="./pages/licitacoes.html">Licitações públicas</a>
+        <a class="is-licia" href="#licia">
+          <svg class="nav-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.4 5.7 6.2.6-4.7 4.1 1.4 6-5.3-3.2-5.3 3.2 1.4-6L3.4 8.9l6.2-.6L12 2.6z"/></svg>
+          LICIA
+        </a>
         <a href="./pages/planos.html">Planos</a>
       </nav>
       <div class="header-actions">
-        <a class="login" href="./pages/contato.html">Lista de espera</a>
-        <a class="btn btn-primary" href="./pages/contato.html">Falar com a equipe</a>
+        <a class="login" href="./pages/login.html">Entrar</a>
+        <a class="btn btn-gold" href="./pages/cadastro.html">Criar conta</a>
         <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-drawer" aria-label="Abrir menu">
           <span class="nav-toggle__bars" aria-hidden="true"></span>
         </button>
@@ -49,175 +55,380 @@
         <ul class="nav-drawer__list">
           <li><a href="./pages/para-orgaos.html">Para órgãos</a></li>
           <li><a href="./pages/para-fornecedores.html">Para fornecedores</a></li>
+          <li><a href="./pages/licitacoes.html">Licitações</a></li>
           <li><a href="./pages/funcionalidades.html">Funcionalidades</a></li>
-          <li><a href="./pages/licitacoes.html">Licitações públicas</a></li>
+          <li><a href="#licia">LICIA</a></li>
           <li><a href="./pages/planos.html">Planos</a></li>
         </ul>
         <div class="nav-drawer__actions">
-          <a class="btn btn-outline" href="./pages/contato.html">Lista de espera</a>
-          <a class="btn btn-primary" href="./pages/contato.html">Falar com a equipe</a>
+          <a class="btn btn-ghost-dark" href="./pages/login.html">Entrar</a>
+          <a class="btn btn-gold" href="./pages/cadastro.html">Criar conta</a>
         </div>
       </div>
     </div>
   </header>
+
   <main id="conteudo">
-    <section class="hero mesh">
-      <div class="hero__blob hero__blob--a" aria-hidden="true"></div>
-      <div class="hero__blob hero__blob--b" aria-hidden="true"></div>
-      <div class="wrap hero__content">
-        <div class="brand">
-          <img src="./assets/logo-mark.png" srcset="./assets/logo-mark.png 1x, ./assets/logo-mark@2x.png 2x" alt="" width="48" height="48" />
-          <span>Compras <b>Já</b></span>
+    <section class="hero mesh-dark" aria-labelledby="hero-title">
+      <div class="gold-waves" aria-hidden="true"></div>
+      <div class="wrap hero__grid">
+        <div>
+          <p class="hero__eyebrow">Plataforma de licitações eletrônicas</p>
+          <h1 id="hero-title">A nova geração das licitações eletrônicas</h1>
+          <p class="lead">
+            Conectamos órgãos públicos e fornecedores em um ambiente moderno, seguro e eficiente —
+            do edital à contratação, com transparência e inteligência.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn-lg btn-gold" href="./pages/para-fornecedores.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16v12H4V7zm2-3h12l2 3H4l2-3z" stroke="currentColor" stroke-width="1.7"/></svg>
+              Sou fornecedor →
+            </a>
+            <a class="btn btn-lg btn-ghost-dark" href="./pages/para-orgaos.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20V10l8-5 8 5v10M9 20v-6h6v6" stroke="currentColor" stroke-width="1.7"/></svg>
+              Sou órgão público →
+            </a>
+          </div>
         </div>
-        <p class="eyebrow">Licitações inteligentes. Oportunidades reais.</p>
-        <h1>
-          Compras Já. A nova geração das
-          <span class="gradient-text">licitações eletrônicas</span>.
-        </h1>
-        <p class="lead">
-          Conectamos órgãos públicos e fornecedores em uma plataforma inteligente, segura e
-          transparente. Simplifique contratações, descubra oportunidades e transforme a gestão
-          das licitações.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-lg btn-secondary" href="./pages/funcionalidades.html">
-            Conhecer a plataforma →
-          </a>
-          <a class="btn btn-lg btn-primary" href="./pages/contato.html">
-            Entrar na lista de espera
-          </a>
+        <div class="hero__visual">
+          <img src="./assets/hero-laptop-mockup.jpg" width="1120" height="840" alt="Mockup do painel Compras Já com oportunidades de licitação" />
         </div>
       </div>
     </section>
 
-    <section class="section section--white">
-      <div class="wrap">
-        <p class="eyebrow" style="color: var(--text-gold-on-light)">Uma plataforma, duas jornadas</p>
-        <h2>Escolha o seu lado da mesa. O Compras Já acompanha o processo inteiro.</h2>
-        <div class="grid-2">
-          <a class="panel" href="./pages/para-orgaos.html">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#171C22" stroke-width="2" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
-            <h3>Para órgãos públicos</h3>
-            <p>Planejamento, editais, sessões, julgamento, habilitação, recursos e contratos — com trilha de auditoria no roadmap do produto.</p>
-            <span class="more">Ver jornada do órgão →</span>
-          </a>
-          <a class="panel" href="./pages/para-fornecedores.html">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A35D" stroke-width="2" aria-hidden="true"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2 2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/></svg>
-            <h3>Para fornecedores</h3>
-            <p>Oportunidades, documentos, propostas com protocolo e acompanhamento de disputas e contratos — conforme os marcos forem liberados.</p>
-            <span class="more">Ver jornada do fornecedor →</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section mesh-dark">
-      <div class="wrap">
-        <p class="eyebrow" style="color:var(--brand-gold-light)">Tecnologia com controle humano</p>
-        <h2>A plataforma executa o trabalho pesado. A decisão continua com você.</h2>
-        <div class="principles">
-          <article class="principle">
-            <div class="n">01</div>
-            <h3>Execução assistida</h3>
-            <p>Fluxos e validações alinhados à Lei 14.133 — sem decisões administrativas autônomas por IA.</p>
-          </article>
-          <article class="principle">
-            <div class="n">02</div>
-            <h3>Auditoria no roadmap</h3>
-            <p>Permissões, trilhas e isolamento entre organizações fazem parte da arquitetura do produto em evolução.</p>
-          </article>
-          <article class="principle">
-            <div class="n">03</div>
-            <h3>Transparência como princípio</h3>
-            <p>Consulta pública sem paywall para o que deve ser público. Sigilo respeitado até o momento legal.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
+    <section class="section" aria-labelledby="opp-title">
       <div class="wrap">
         <div class="section-head">
-          <div>
-            <p class="eyebrow">Transparência</p>
-            <h2>Processos públicos no Compras Já</h2>
-            <p class="sub"><span class="badge-demo">Demonstração</span> Exemplo estático. Não é um certame oficial.</p>
-          </div>
-          <a class="btn btn-outline" href="./pages/licitacoes.html">Ver exemplo</a>
+          <p class="section-kicker">Mercado</p>
+          <h2 id="opp-title">Oportunidades em destaque</h2>
+          <p class="section-lead">Exemplos ilustrativos da vitrine. Dados reais chegam com a integração PNCP.</p>
         </div>
-        <div class="list">
-          <a href="./pages/licitacoes.html">
-            <div>
-              <div class="meta">Pregão Eletrônico · DEMO</div>
-              <div class="title">Aquisição de equipamentos de TI — demonstração</div>
-              <div class="detail">001/2026 · Órgão Público Demonstração · Brasília/DF</div>
+        <div class="opp-grid">
+          <article class="opp-card">
+            <div class="opp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M5 7h14v12H5V7zm3-3h8l1.5 3h-11L8 4z" stroke="currentColor" stroke-width="1.7"/></svg>
             </div>
-            <div class="value">R$ 250.000,00</div>
-          </a>
+            <span class="badge-demo">Exemplo ilustrativo</span>
+            <h3>Aquisição de materiais</h3>
+            <p class="opp-card__meta">Pregão eletrônico</p>
+          </article>
+          <article class="opp-card">
+            <div class="opp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="12" rx="1.5" stroke="currentColor" stroke-width="1.7"/><path d="M8 19h8" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <span class="badge-demo">Exemplo ilustrativo</span>
+            <h3>Serviços de tecnologia</h3>
+            <p class="opp-card__meta">Pregão eletrônico</p>
+          </article>
+          <article class="opp-card">
+            <div class="opp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.7"/><path d="M12 8v4l2.5 1.5" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <span class="badge-demo">Exemplo ilustrativo</span>
+            <h3>Manutenção predial</h3>
+            <p class="opp-card__meta">Concorrência</p>
+          </article>
+          <article class="opp-card">
+            <div class="opp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 16h13l3-5H8L6 8H3v8zm3 3a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm10 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <span class="badge-demo">Exemplo ilustrativo</span>
+            <h3>Mobiliário e logística</h3>
+            <p class="opp-card__meta">Dispensa eletrônica</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section section--white">
-      <div class="wrap">
-        <div class="cta-band mesh-dark">
-          <p class="eyebrow" style="color:var(--brand-gold-light)">Pré-lançamento</p>
-          <h2>O sistema trabalha para você. Entre na lista de espera.</h2>
-          <p class="sub" style="color:rgba(255,255,255,.75)">
-            Cadastro e login completos estarão no app autenticado após homologação. Enquanto isso, fale com a equipe.
+    <section class="section" style="background: var(--surface-muted);" aria-labelledby="journey-title">
+      <div class="wrap journey">
+        <div class="section-head">
+          <p class="section-kicker">Jornadas</p>
+          <h2 id="journey-title">Uma plataforma, duas jornadas</h2>
+          <p class="section-lead">Soluções especializadas para quem compra e para quem vende no setor público.</p>
+        </div>
+        <div class="journey-grid">
+          <article class="journey-card">
+            <div class="journey-card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 20V10l8-5 8 5v10M9 20v-6h6v6" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <h3>Para órgãos públicos</h3>
+            <p>Conduza processos com conformidade, trilha de auditoria e visão completa do ciclo.</p>
+            <a class="link-gold" href="./pages/para-orgaos.html">Conhecer a solução →</a>
+          </article>
+          <article class="journey-card">
+            <div class="journey-card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M5 19c1.5-3.2 4-4.8 7-4.8S17.5 15.8 19 19" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <h3>Para fornecedores</h3>
+            <p>Encontre oportunidades, organize documentos e acompanhe disputas em um só lugar.</p>
+            <a class="link-gold" href="./pages/para-fornecedores.html">Conhecer a solução →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="dispute-title">
+      <div class="wrap dispute">
+        <div class="dispute__copy">
+          <p class="section-kicker">Demonstração</p>
+          <h2 id="dispute-title">Sala de Disputas</h2>
+          <p>
+            Ambiente intuitivo e seguro para lances em tempo real, com etapas claras do processo —
+            da proposta à decisão.
           </p>
-          <div class="cta-row">
-            <a class="btn btn-lg btn-secondary" href="./pages/contato.html">Entrar na lista de espera</a>
-            <a class="btn btn-lg btn-ghost-light" href="./pages/contato.html">Falar com a equipe</a>
+          <a class="btn btn-outline-gold" href="./pages/licitacoes.html">Ver demonstração →</a>
+        </div>
+        <div class="dispute__stage">
+          <div class="mock-window" aria-hidden="true">
+            <div class="mock-window__bar"><i></i><i></i><i></i></div>
+            <div class="mock-window__body">
+              <table class="mock-table">
+                <thead>
+                  <tr><th>Fornecedor</th><th>Lance</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Alpha Tech</td><td>R$ 184.200</td><td><span class="mock-pill">Melhor</span></td></tr>
+                  <tr><td>Nova Serviços</td><td>R$ 186.450</td><td>—</td></tr>
+                  <tr><td>Horizonte Ltda</td><td>R$ 189.900</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <ol class="stepper">
+            <li class="stepper__item is-done"><span class="stepper__dot" aria-hidden="true">✓</span> Propostas</li>
+            <li class="stepper__item is-active"><span class="stepper__dot" aria-hidden="true">2</span> Disputa</li>
+            <li class="stepper__item"><span class="stepper__dot" aria-hidden="true">3</span> Julgamento</li>
+            <li class="stepper__item"><span class="stepper__dot" aria-hidden="true">4</span> Recursos</li>
+            <li class="stepper__item"><span class="stepper__dot" aria-hidden="true">5</span> Decisão</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="licia mesh-dark" id="licia" aria-labelledby="licia-title">
+      <div class="gold-waves" aria-hidden="true"></div>
+      <div class="wrap licia__grid">
+        <div>
+          <div class="licia-brand">
+            <span class="licia-brand__mark" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6l2.4 5.7 6.2.6-4.7 4.1 1.4 6-5.3-3.2-5.3 3.2 1.4-6L3.4 8.9l6.2-.6L12 2.6z"/></svg>
+            </span>
+            <strong>LICIA</strong>
+          </div>
+          <h2 id="licia-title">A inteligência do Compras Já</h2>
+        </div>
+        <p>
+          A LICIA transforma editais em oportunidades: analisa requisitos, prazos e riscos para
+          organizar o que importa — e acelerar a tomada de decisão.
+        </p>
+        <div class="licia-panel">
+          <h3>Resumo do edital</h3>
+          <div class="licia-checks">
+            <label><input type="checkbox" checked disabled /> Objeto</label>
+            <label><input type="checkbox" checked disabled /> Exigências</label>
+            <label><input type="checkbox" checked disabled /> Prazos</label>
+            <label><input type="checkbox" disabled /> Riscos</label>
+            <label><input type="checkbox" disabled /> Documentos</label>
+          </div>
+          <div class="licia-chat">
+            <span>Pergunte à LICIA sobre este edital…</span>
+            <button type="button" tabindex="-1" aria-hidden="true">Enviar</button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="features-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="section-kicker">Produto</p>
+          <h2 id="features-title">Funcionalidades</h2>
+        </div>
+        <div class="features-grid">
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 3v5c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-3z" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <h3>Conformidade</h3>
+            <p>Processos alinhados à Lei 14.133/2021, com trilha e controles.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 7h14v12H5V7zm3-3h8l1.5 3h-11L8 4z" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <h3>Documentos</h3>
+            <p>Organize editais, anexos e comprovações em um repositório único.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 8h10M7 12h10M7 16h6M5 4h14v16H5V4z" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <h3>Contratos</h3>
+            <p>Acompanhe o ciclo pós-adjudicação com visão operacional clara.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <h3>Transparência</h3>
+            <p>Dados públicos e rastreáveis para fiscalização e cidadania.</p>
+          </article>
+        </div>
+
+        <div class="how" aria-labelledby="how-title">
+          <div class="section-head">
+            <p class="section-kicker">Fluxo</p>
+            <h2 id="how-title">Como funciona</h2>
+          </div>
+          <div class="how-steps">
+            <article class="how-step">
+              <span class="how-step__num">1</span>
+              <h3>Crie sua conta</h3>
+              <p>Cadastre organização e perfil de acesso.</p>
+            </article>
+            <article class="how-step">
+              <span class="how-step__num">2</span>
+              <h3>Configure o ambiente</h3>
+              <p>Unidades, papéis e preferências do portal.</p>
+            </article>
+            <article class="how-step">
+              <span class="how-step__num">3</span>
+              <h3>Participe ou conduza</h3>
+              <p>Publique certames ou dispute oportunidades.</p>
+            </article>
+            <article class="how-step">
+              <span class="how-step__num">4</span>
+              <h3>Acompanhe e gerencie</h3>
+              <p>Painéis, alertas e histórico do processo.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: var(--surface-muted);" aria-labelledby="plans-title">
+      <div class="wrap plans-faq">
+        <div>
+          <div class="section-head">
+            <p class="section-kicker">Comercial</p>
+            <h2 id="plans-title">Planos</h2>
+            <p class="section-lead">Escolha o ritmo certo para o tamanho da sua operação.</p>
+          </div>
+          <div class="plan-list">
+            <a class="plan" href="./pages/planos.html">
+              <span class="plan__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19V8l7-4 7 4v11H5z" stroke="currentColor" stroke-width="1.7"/></svg>
+              </span>
+              <span>
+                <h3 class="plan__title">Essencial</h3>
+                <p class="plan__meta">Para começar com o essencial do ciclo.</p>
+              </span>
+              <span class="plan__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="plan is-featured" href="./pages/planos.html">
+              <span class="plan__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.2 5.3L20 9l-4 3.7.9 5.8L12 15.8 7.1 18.5 8 12.7 4 9l5.8-.7L12 3z" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+              <span>
+                <h3 class="plan__title">Profissional <span class="plan__badge">Mais completo</span></h3>
+                <p class="plan__meta">Operação completa com LICIA e disputas.</p>
+              </span>
+              <span class="plan__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="plan" href="./pages/planos.html">
+              <span class="plan__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 18V8h4v10H4zm6 0V4h4v14h-4zm6 0v-7h4v7h-4z" stroke="currentColor" stroke-width="1.7"/></svg>
+              </span>
+              <span>
+                <h3 class="plan__title">Corporativo</h3>
+                <p class="plan__meta">Escala, governança e suporte dedicado.</p>
+              </span>
+              <span class="plan__arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-head">
+            <p class="section-kicker">Suporte</p>
+            <h2 id="faq-title">Perguntas frequentes</h2>
+          </div>
+          <div class="faq">
+            <details open>
+              <summary>O Compras Já já está em operação oficial?</summary>
+              <p>A vitrine é institucional. Login, cadastro e certames oficiais dependem do app autenticado e das homologações necessárias.</p>
+            </details>
+            <details>
+              <summary>Posso consultar licitações reais hoje?</summary>
+              <p>Os cards desta página são exemplos ilustrativos. A integração PNCP está no roadmap (Entrega C).</p>
+            </details>
+            <details>
+              <summary>O que é a LICIA?</summary>
+              <p>É a camada de inteligência do Compras Já para leitura de editais, prazos e requisitos — demonstrada nesta página.</p>
+            </details>
+            <details>
+              <summary>Como falo com a equipe?</summary>
+              <p>Use a página de <a class="link-gold" href="./pages/contato.html">contato</a> ou o e-mail contato@plentyengenharia.com.br.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta mesh-dark" aria-labelledby="final-cta-title">
+      <div class="gold-waves" aria-hidden="true"></div>
+      <div class="wrap final-cta__inner">
+        <div>
+          <h2 id="final-cta-title">Pronto para modernizar suas licitações com o Compras Já?</h2>
+          <p>Entre na lista de espera ou fale com a equipe para o pré-lançamento da plataforma.</p>
+        </div>
+        <a class="btn btn-lg btn-gold" href="./pages/cadastro.html">Criar conta gratuita →</a>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <div class="wrap footer-grid">
       <div class="footer-brand">
         <a class="brand" href="./index.html" aria-label="Compras Já">
-          <img class="brand-mark-light" src="./assets/logo-mark-light.png" srcset="./assets/logo-mark-light.png 1x, ./assets/logo-mark-light@2x.png 2x" alt="" width="40" height="40" />
+          <img src="./assets/logo-mark-light.png" srcset="./assets/logo-mark-light.png 1x, ./assets/logo-mark-light@2x.png 2x" alt="" width="36" height="36" />
           <span>Compras <b>Já</b></span>
         </a>
-        <p>Licitações inteligentes. Oportunidades reais.</p>
-        <p style="font-size:.78rem;color:rgba(255,255,255,.5)">
-          Referência legislativa: Lei Federal nº 14.133/2021. Ambiente demonstrativo — certames oficiais dependem de validação jurídica e técnica.
-        </p>
+        <p>Licitações inteligentes. Oportunidades reais. Ambiente demonstrativo — certames oficiais dependem de validação jurídica e técnica.</p>
       </div>
-      <div class="footer-cols">
-        <div>
-          <h4>Produto</h4>
-          <ul>
-            <li><a href="./pages/para-orgaos.html">Para órgãos</a></li>
-            <li><a href="./pages/para-fornecedores.html">Para fornecedores</a></li>
-            <li><a href="./pages/funcionalidades.html">Funcionalidades</a></li>
-            <li><a href="./pages/planos.html">Planos</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Institucional</h4>
-          <ul>
-            <li><a href="./pages/sobre.html">Sobre nós</a></li>
-            <li><a href="./pages/contato.html">Contato</a></li>
-            <li><a href="./pages/termos.html">Termos de Uso</a></li>
-            <li><a href="./pages/privacidade.html">Privacidade</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Portais</h4>
-          <ul>
-            <li><a href="./pages/licitacoes.html">Transparência (demo)</a></li>
-            <li><a href="./pages/contato.html">Lista de espera</a></li>
-            <li><a href="./pages/ajuda.html">Ajuda</a></li>
-          </ul>
-        </div>
+      <div class="footer-col">
+        <h4>Soluções</h4>
+        <a href="./pages/para-orgaos.html">Para órgãos</a>
+        <a href="./pages/para-fornecedores.html">Para fornecedores</a>
+        <a href="./pages/funcionalidades.html">Funcionalidades</a>
+        <a href="./pages/planos.html">Planos</a>
+      </div>
+      <div class="footer-col">
+        <h4>Institucional</h4>
+        <a href="./pages/sobre.html">Sobre</a>
+        <a href="./pages/contato.html">Contato</a>
+        <a href="./pages/termos.html">Termos</a>
+        <a href="./pages/privacidade.html">Privacidade</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ajuda</h4>
+        <a href="./pages/ajuda.html">Central de ajuda</a>
+        <a href="./pages/licitacoes.html">Licitações (demo)</a>
+        <a href="./pages/login.html">Entrar</a>
+        <a href="./pages/cadastro.html">Criar conta</a>
       </div>
     </div>
-    <div class="footer-bottom">© <span data-year></span> Compras Já. Todos os direitos reservados.</div>
+    <div class="wrap footer-bottom">
+      <p>© <span data-year>2026</span> Compras Já. Todos os direitos reservados.</p>
+      <div class="social" aria-label="Redes sociais">
+        <a href="https://www.linkedin.com/" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">in</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube" rel="noopener noreferrer" target="_blank">▶</a>
+        <a href="https://www.instagram.com/" aria-label="Instagram" rel="noopener noreferrer" target="_blank">◎</a>
+      </div>
+    </div>
   </footer>
+
   <script src="./js/site.js" defer></script>
-  <script>document.querySelectorAll('[data-year]').forEach(function(el){el.textContent=new Date().getFullYear();});</script>
 </body>
 </html>
