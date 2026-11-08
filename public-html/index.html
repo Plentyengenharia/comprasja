@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Compras Já | Plataforma de Licitações Eletrônicas</title>
   <meta name="description" content="Licitações inteligentes. Oportunidades reais. Plataforma nacional de licitações eletrônicas." />
+  <link rel="canonical" href="https://comprasja.plentyengenharia.com.br/" />
   <meta property="og:title" content="Compras Já | Plataforma de Licitações Eletrônicas" />
-  <meta property="og:description" content="Licitações inteligentes. Oportunidades reais." />
+  <meta property="og:description" content="Licitações inteligentes. Oportunidades reais. Plataforma nacional de licitações eletrônicas." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://comprasja.plentyengenharia.com.br/" />
+  <meta property="og:image" content="https://comprasja.plentyengenharia.com.br/assets/logo-wordmark.png" />
+  <meta name="theme-color" content="#171C22" />
   <link rel="icon" href="./favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="./favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" sizes="180x180" />
@@ -18,10 +22,11 @@
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="site-header">
     <div class="wrap site-header__inner">
       <a class="brand" href="./index.html" aria-label="Compras Já">
-        <img src="./assets/logo-mark.png" srcset="./assets/logo-mark.png 1x, ./assets/logo-mark@2x.png 2x" alt="" width="40" height="40" />
+        <img class="brand-mark-dark" src="./assets/logo-mark.png" srcset="./assets/logo-mark.png 1x, ./assets/logo-mark@2x.png 2x" alt="" width="40" height="40" />
         <span>Compras <b>Já</b></span>
       </a>
       <nav class="nav" aria-label="Principal">
@@ -32,19 +37,36 @@
         <a href="./pages/planos.html">Planos</a>
       </nav>
       <div class="header-actions">
-        <a class="login" href="./pages/login.html">Entrar</a>
-        <a class="btn btn-primary" href="./pages/cadastro.html">Criar conta</a>
+        <a class="login" href="./pages/contato.html">Lista de espera</a>
+        <a class="btn btn-primary" href="./pages/contato.html">Falar com a equipe</a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-drawer" aria-label="Abrir menu">
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-drawer" id="nav-drawer" data-nav-panel hidden>
+      <div class="wrap">
+        <ul class="nav-drawer__list">
+          <li><a href="./pages/para-orgaos.html">Para órgãos</a></li>
+          <li><a href="./pages/para-fornecedores.html">Para fornecedores</a></li>
+          <li><a href="./pages/funcionalidades.html">Funcionalidades</a></li>
+          <li><a href="./pages/licitacoes.html">Licitações públicas</a></li>
+          <li><a href="./pages/planos.html">Planos</a></li>
+        </ul>
+        <div class="nav-drawer__actions">
+          <a class="btn btn-outline" href="./pages/contato.html">Lista de espera</a>
+          <a class="btn btn-primary" href="./pages/contato.html">Falar com a equipe</a>
+        </div>
       </div>
     </div>
   </header>
-
-  <main>
+  <main id="conteudo">
     <section class="hero mesh">
       <div class="hero__blob hero__blob--a" aria-hidden="true"></div>
       <div class="hero__blob hero__blob--b" aria-hidden="true"></div>
       <div class="wrap hero__content">
         <div class="brand">
-          <img src="./assets/logo-mark.png" srcset="./assets/logo-mark.png 1x, ./assets/logo-mark@2x.png 2x" alt="" width="40" height="40" />
+          <img src="./assets/logo-mark.png" srcset="./assets/logo-mark.png 1x, ./assets/logo-mark@2x.png 2x" alt="" width="48" height="48" />
           <span>Compras <b>Já</b></span>
         </div>
         <p class="eyebrow">Licitações inteligentes. Oportunidades reais.</p>
@@ -61,8 +83,8 @@
           <a class="btn btn-lg btn-secondary" href="./pages/funcionalidades.html">
             Conhecer a plataforma →
           </a>
-          <a class="btn btn-lg btn-primary" href="./pages/cadastro.html">
-            Criar conta gratuitamente
+          <a class="btn btn-lg btn-primary" href="./pages/contato.html">
+            Entrar na lista de espera
           </a>
         </div>
       </div>
@@ -70,19 +92,19 @@
 
     <section class="section section--white">
       <div class="wrap">
-        <p class="eyebrow" style="color: var(--emerald)">Uma plataforma, duas jornadas</p>
+        <p class="eyebrow" style="color: var(--text-gold-on-light)">Uma plataforma, duas jornadas</p>
         <h2>Escolha o seu lado da mesa. O Compras Já acompanha o processo inteiro.</h2>
         <div class="grid-2">
           <a class="panel" href="./pages/para-orgaos.html">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#176B9A" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#171C22" stroke-width="2" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
             <h3>Para órgãos públicos</h3>
-            <p>Planejamento, editais, sessões, julgamento, habilitação, recursos e contratos com trilha de auditoria.</p>
+            <p>Planejamento, editais, sessões, julgamento, habilitação, recursos e contratos — com trilha de auditoria no roadmap do produto.</p>
             <span class="more">Ver jornada do órgão →</span>
           </a>
           <a class="panel" href="./pages/para-fornecedores.html">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2 2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/></svg>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9A35D" stroke-width="2" aria-hidden="true"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2 2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/></svg>
             <h3>Para fornecedores</h3>
-            <p>Oportunidades, cofre documental, propostas com protocolo e acompanhamento de disputas e contratos.</p>
+            <p>Oportunidades, documentos, propostas com protocolo e acompanhamento de disputas e contratos — conforme os marcos forem liberados.</p>
             <span class="more">Ver jornada do fornecedor →</span>
           </a>
         </div>
@@ -97,16 +119,16 @@
           <article class="principle">
             <div class="n">01</div>
             <h3>Execução assistida</h3>
-            <p>Fluxos, validações e registros nas etapas da Lei 14.133 — sem decisões administrativas autônomas por IA.</p>
+            <p>Fluxos e validações alinhados à Lei 14.133 — sem decisões administrativas autônomas por IA.</p>
           </article>
           <article class="principle">
             <div class="n">02</div>
-            <h3>Auditoria nativa</h3>
-            <p>Permissões no backend, trilhas com integridade e isolamento rigoroso entre organizações.</p>
+            <h3>Auditoria no roadmap</h3>
+            <p>Permissões, trilhas e isolamento entre organizações fazem parte da arquitetura do produto em evolução.</p>
           </article>
           <article class="principle">
             <div class="n">03</div>
-            <h3>Transparência real</h3>
+            <h3>Transparência como princípio</h3>
             <p>Consulta pública sem paywall para o que deve ser público. Sigilo respeitado até o momento legal.</p>
           </article>
         </div>
@@ -119,14 +141,14 @@
           <div>
             <p class="eyebrow">Transparência</p>
             <h2>Processos públicos no Compras Já</h2>
-            <p class="sub">Exemplo demonstrativo. No ambiente completo, a lista vem do banco de dados.</p>
+            <p class="sub"><span class="badge-demo">Demonstração</span> Exemplo estático. Não é um certame oficial.</p>
           </div>
-          <a class="btn btn-outline" href="./pages/licitacoes.html">Abrir portal</a>
+          <a class="btn btn-outline" href="./pages/licitacoes.html">Ver exemplo</a>
         </div>
         <div class="list">
           <a href="./pages/licitacoes.html">
             <div>
-              <div class="meta">Pregão Eletrônico · PUBLISHED</div>
+              <div class="meta">Pregão Eletrônico · DEMO</div>
               <div class="title">Aquisição de equipamentos de TI — demonstração</div>
               <div class="detail">001/2026 · Órgão Público Demonstração · Brasília/DF</div>
             </div>
@@ -139,25 +161,24 @@
     <section class="section section--white">
       <div class="wrap">
         <div class="cta-band mesh-dark">
-          <p class="eyebrow" style="color:var(--brand-gold-light)">Comece agora</p>
-          <h2>O sistema trabalha para você. Comece no ambiente demonstrativo.</h2>
+          <p class="eyebrow" style="color:var(--brand-gold-light)">Pré-lançamento</p>
+          <h2>O sistema trabalha para você. Entre na lista de espera.</h2>
           <p class="sub" style="color:rgba(255,255,255,.75)">
-            Cadastre-se e explore os portais. Recursos oficiais permanecem bloqueados até homologação jurídica e técnica.
+            Cadastro e login completos estarão no app autenticado após homologação. Enquanto isso, fale com a equipe.
           </p>
           <div class="cta-row">
-            <a class="btn btn-lg btn-secondary" href="./pages/cadastro.html">Criar conta gratuitamente</a>
+            <a class="btn btn-lg btn-secondary" href="./pages/contato.html">Entrar na lista de espera</a>
             <a class="btn btn-lg btn-ghost-light" href="./pages/contato.html">Falar com a equipe</a>
           </div>
         </div>
       </div>
     </section>
   </main>
-
   <footer class="site-footer">
     <div class="wrap footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="./index.html">
-          <img src="./assets/logo-mark.png" srcset="./assets/logo-mark.png 1x, ./assets/logo-mark@2x.png 2x" alt="" width="40" height="40" />
+        <a class="brand" href="./index.html" aria-label="Compras Já">
+          <img class="brand-mark-light" src="./assets/logo-mark-light.png" srcset="./assets/logo-mark-light.png 1x, ./assets/logo-mark-light@2x.png 2x" alt="" width="40" height="40" />
           <span>Compras <b>Já</b></span>
         </a>
         <p>Licitações inteligentes. Oportunidades reais.</p>
@@ -187,15 +208,16 @@
         <div>
           <h4>Portais</h4>
           <ul>
-            <li><a href="./pages/licitacoes.html">Transparência</a></li>
-            <li><a href="./pages/login.html">Entrar</a></li>
-            <li><a href="./pages/cadastro.html">Cadastro</a></li>
+            <li><a href="./pages/licitacoes.html">Transparência (demo)</a></li>
+            <li><a href="./pages/contato.html">Lista de espera</a></li>
+            <li><a href="./pages/ajuda.html">Ajuda</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">© <span id="y"></span> Compras Já. Todos os direitos reservados.</div>
+    <div class="footer-bottom">© <span data-year></span> Compras Já. Todos os direitos reservados.</div>
   </footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <script src="./js/site.js" defer></script>
+  <script>document.querySelectorAll('[data-year]').forEach(function(el){el.textContent=new Date().getFullYear();});</script>
 </body>
 </html>
