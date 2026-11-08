@@ -320,33 +320,79 @@
 
     <section class="licia mesh-dark" id="licia" aria-labelledby="licia-title">
       <div class="gold-waves" aria-hidden="true"></div>
-      <div class="wrap licia__grid">
-        <div>
+      <div class="licia-particles" aria-hidden="true"></div>
+      <div class="wrap licia__layout">
+        <div class="licia__copy">
           <div class="licia-brand">
             <span class="licia-brand__mark" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6l2.4 5.7 6.2.6-4.7 4.1 1.4 6-5.3-3.2-5.3 3.2 1.4-6L3.4 8.9l6.2-.6L12 2.6z"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg>
             </span>
-            <strong>LICIA</strong>
+            <div>
+              <strong>LICIA</strong>
+              <span class="licia-brand__tag">A inteligência do Compras Já.</span>
+            </div>
           </div>
-          <h2 id="licia-title">A inteligência do Compras Já</h2>
+          <h2 id="licia-title">
+            <span class="grad">Inteligência</span> que transforma
+            <span class="grad">licitações em oportunidades.</span>
+          </h2>
+          <p class="licia__lead">
+            Analise editais, identifique exigências, organize prazos e tome decisões com mais
+            segurança e agilidade.
+          </p>
+          <div class="licia__cta">
+            <a class="btn btn-lg btn-gold" href="./pages/funcionalidades.html">
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg>
+              Conheça a LICIA →
+            </a>
+            <a class="btn btn-lg btn-ghost-dark" href="./pages/licitacoes.html">Ver demonstração</a>
+          </div>
         </div>
-        <p>
-          A LICIA transforma editais em oportunidades: analisa requisitos, prazos e riscos para
-          organizar o que importa — e acelerar a tomada de decisão.
-        </p>
-        <div class="licia-panel">
-          <h3>Resumo do edital</h3>
-          <div class="licia-checks">
-            <label><input type="checkbox" checked disabled /> Objeto</label>
-            <label><input type="checkbox" checked disabled /> Exigências</label>
-            <label><input type="checkbox" checked disabled /> Prazos</label>
-            <label><input type="checkbox" disabled /> Riscos</label>
-            <label><input type="checkbox" disabled /> Documentos</label>
-          </div>
-          <div class="licia-chat">
-            <span>Pergunte à LICIA sobre este edital…</span>
-            <button type="button" tabindex="-1" aria-hidden="true">Enviar</button>
-          </div>
+
+        <div class="licia-hub" aria-hidden="true">
+          <svg class="licia-hub__svg" viewBox="0 0 480 480" role="presentation">
+            <defs>
+              <radialGradient id="liciaGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#C9A35D" stop-opacity="0.35"/>
+                <stop offset="55%" stop-color="#C9A35D" stop-opacity="0.08"/>
+                <stop offset="100%" stop-color="#C9A35D" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="liciaLineGlow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="1.4" result="b"/>
+                <feMerge>
+                  <feMergeNode in="b"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <circle class="licia-orbit" cx="240" cy="240" r="92"/>
+            <circle class="licia-orbit" cx="240" cy="240" r="138"/>
+            <circle class="licia-orbit licia-orbit--strong" cx="240" cy="240" r="186"/>
+            <circle cx="240" cy="240" r="168" fill="url(#liciaGlow)"/>
+            <!-- Lines: node → center (flow animates inward) -->
+            <g class="licia-lines" filter="url(#liciaLineGlow)" stroke="#C9A35D" stroke-width="1.35" fill="none" stroke-linecap="round">
+              <path class="licia-flow" d="M240 54 L240 198"/>
+              <path class="licia-flow" d="M372 98 L268 212"/>
+              <path class="licia-flow" d="M426 240 L282 240"/>
+              <path class="licia-flow" d="M372 382 L268 268"/>
+              <path class="licia-flow" d="M240 426 L240 282"/>
+              <path class="licia-flow" d="M108 382 L212 268"/>
+              <path class="licia-flow" d="M54 240 L198 240"/>
+              <path class="licia-flow" d="M108 98 L212 212"/>
+            </g>
+            <rect class="licia-core" x="204" y="204" width="72" height="72" rx="16"/>
+            <path class="licia-core__star" d="M240 218l5.2 17.8L263 241l-17.8 5.2L240 264l-5.2-17.8L217 241l17.8-5.2z" fill="#C9A35D"/>
+          </svg>
+          <ul class="licia-hub__nodes">
+            <li class="licia-node-slot" style="--i:0"><span class="licia-node"><span class="licia-node__ico" data-ico="book"></span>Termo de referência</span></li>
+            <li class="licia-node-slot" style="--i:1"><span class="licia-node"><span class="licia-node__ico" data-ico="chart"></span>Pesquisa de preços</span></li>
+            <li class="licia-node-slot" style="--i:2"><span class="licia-node"><span class="licia-node__ico" data-ico="gavel"></span>Edital</span></li>
+            <li class="licia-node-slot" style="--i:3"><span class="licia-node"><span class="licia-node__ico" data-ico="users"></span>Propostas</span></li>
+            <li class="licia-node-slot" style="--i:4"><span class="licia-node"><span class="licia-node__ico" data-ico="badge"></span>Habilitação</span></li>
+            <li class="licia-node-slot" style="--i:5"><span class="licia-node"><span class="licia-node__ico" data-ico="shield"></span>Parecer técnico</span></li>
+            <li class="licia-node-slot" style="--i:6"><span class="licia-node"><span class="licia-node__ico" data-ico="doc"></span>Ata</span></li>
+            <li class="licia-node-slot" style="--i:7"><span class="licia-node"><span class="licia-node__ico" data-ico="layers"></span>ETP</span></li>
+          </ul>
         </div>
       </div>
     </section>
