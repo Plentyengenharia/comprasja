@@ -14,6 +14,8 @@ export const BRAND_COLORS = {
   navy: '#102A43',
   tech: '#176B9A',
   emerald: '#0D9488',
+  gold: '#C9A227',
+  charcoal: '#1A1A1B',
   white: '#FFFFFF',
   surfaceMuted: '#F7F9FC',
   ink: '#172334',

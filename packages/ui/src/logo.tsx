@@ -8,6 +8,8 @@ type LogoProps = {
   showWordmark?: boolean;
   inverted?: boolean;
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  /** Prefer PNG app icon; falls back to /logo-mark.png from the host app public folder. */
+  markSrc?: string;
 };
 
 const markSize = {
@@ -24,7 +26,7 @@ const wordSize = {
   xl: 'text-[1.9rem] tracking-[-0.04em]',
 } as const;
 
-/** Logotipo provisório original — símbolo geométrico de conexão/agilidade. */
+/** Logotipo oficial — ícone hexagonal com detalhe dourado + wordmark. */
 export function ComprasJaLogo({
   className,
   markClassName,
@@ -32,53 +34,21 @@ export function ComprasJaLogo({
   showWordmark = true,
   inverted = false,
   size = 'md',
+  markSrc = '/logo-mark.png',
 }: LogoProps) {
-  const ink = inverted ? '#FFFFFF' : '#102A43';
-  const accent = inverted ? '#5EEAD4' : '#0D9488';
-  const tech = inverted ? '#7DD3FC' : '#176B9A';
-
   return (
     <span
       className={cn('inline-flex items-center gap-3', className)}
       aria-label="Compras Já"
     >
-      <svg
-        className={cn(markSize[size], 'shrink-0', markClassName)}
-        viewBox="0 0 48 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
+      <img
+        src={markSrc}
+        alt=""
+        width={56}
+        height={56}
+        className={cn(markSize[size], 'shrink-0 rounded-[22%]', markClassName)}
         aria-hidden={showWordmark}
-      >
-        <title>Compras Já</title>
-        <defs>
-          <linearGradient id="cjMarkBg" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
-            <stop stopColor={ink} />
-            <stop offset="1" stopColor={inverted ? '#0D9488' : '#176B9A'} stopOpacity="0.92" />
-          </linearGradient>
-        </defs>
-        <rect x="2" y="2" width="44" height="44" rx="14" fill="url(#cjMarkBg)" />
-        <path
-          d="M14 24c0-5.523 4.477-10 10-10"
-          stroke={tech}
-          strokeWidth="2.8"
-          strokeLinecap="round"
-        />
-        <path
-          d="M34 24c0 5.523-4.477 10-10 10"
-          stroke={accent}
-          strokeWidth="2.8"
-          strokeLinecap="round"
-        />
-        <circle cx="24" cy="24" r="3.8" fill={accent} />
-        <path
-          d="M31.5 14.5l5 1.5-1.5 5"
-          stroke={tech}
-          strokeWidth="2.3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      />
       {showWordmark ? (
         <span
           className={cn(
@@ -88,8 +58,7 @@ export function ComprasJaLogo({
             wordmarkClassName,
           )}
         >
-          Compras{' '}
-          <span className={inverted ? 'text-teal-200' : 'text-brand-emerald'}>Já</span>
+          Compras <span className="text-brand-gold">Já</span>
         </span>
       ) : null}
     </span>
